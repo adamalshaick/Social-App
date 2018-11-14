@@ -13,6 +13,10 @@ const ProfileSchema = new Schema({
     max: 40
   },
 
+  bio: {
+    type: String
+  },
+
   location: {
     type: String
   },

@@ -14,6 +14,10 @@ module.exports = function validateProfileInput(data) {
     errors.handle = "Profile handle is required";
   }
 
+  if (Validator.isEmpty(data.handle)) {
+    errors.handle = "Profile handle is required";
+  }
+
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
       errors.youtube = "Not a valid URL";
