@@ -11,7 +11,7 @@ class Post extends Component {
   }
 
   render() {
-    const { post, loading } = this.props.post;
+    const { post, loading, showActions } = this.props.post;
     let postContent;
 
     if (post === null || loading || Object.keys(post).length === 0) {
