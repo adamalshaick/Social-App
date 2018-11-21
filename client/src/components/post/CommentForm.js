@@ -32,7 +32,7 @@ class CommentForm extends Component {
     };
 
     this.props.addComment(postId, newComment);
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ text: "" });
   };
 
   onChange = e => {
