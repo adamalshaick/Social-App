@@ -13,11 +13,6 @@
   z-index: -1;
 }
 
-h1 {
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-}
-
 p {
   font-weight: bold;
 }

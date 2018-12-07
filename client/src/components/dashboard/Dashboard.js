@@ -29,7 +29,7 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <ProfileHeader profile={profile} />
-            <div style={{ marginBottom: "60px" }}>
+            <div style={{ float: "right" }}>
               <button
                 onClick={this.onDeleteClick.bind(this)}
                 className="btn btn-danger"

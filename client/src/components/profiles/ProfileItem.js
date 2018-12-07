@@ -9,17 +9,21 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div className="col-2">
+          <div className="col-md-3">
             <img src={profile.user.avatar} alt="" className="rounded-circle" />
           </div>
           <div className="col-lg-6 col-md-4 col-8">
-            <div>{profile.user.name}</div>
+            <div style={{ fontSize: "25px" }}>{profile.user.name}</div>
             <p>
               {isEmpty(profile.location) ? null : (
-                <span>(profile.location</span>
+                <span style={{ fontSize: "20px" }}>{profile.location}</span>
               )}
             </p>
-            <Link to={`/profile/${profile.handle}`} className="btn btn info">
+            <Link
+              style={{ fontSize: "20px" }}
+              to={`/profile/${profile.handle}`}
+              className="btn btn-info mt-3"
+            >
               View Profile
             </Link>
           </div>
