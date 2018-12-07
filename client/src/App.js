@@ -23,6 +23,7 @@ import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 
 import "./App.css";
+import Chat from "./components/chat/Chat";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -83,6 +84,10 @@ class App extends Component {
 
               <Switch>
                 <PrivateRoute exact path="/post/:id" component={Post} />
+              </Switch>
+
+              <Switch>
+                <PrivateRoute exact path="/chat" component={Chat} />
               </Switch>
             </div>
           </div>
