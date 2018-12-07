@@ -11,14 +11,42 @@ class Landing extends Component {
   }
   render() {
     return (
-      <div>
-        LandingPage
-        <Link className="btn btn-lg" to="/login">
-          Login
-        </Link>
-        <Link className="btn btn-lg" to="/register">
-          Sign Up
-        </Link>
+      <div className="landing-page">
+        <div className="landing-image" />
+        <div className="container">
+          <div className=" text-center">
+            <h1 className="display-1 text-white d-inline mt-5">
+              <strong>Social Application</strong>
+            </h1>
+
+            <div className="row">
+              <div
+                style={{ background: "white" }}
+                className="col-md-6 mb-4 p-0 m-0 image-wrapper"
+              >
+                <Link to="/login" className="link">
+                  <img
+                    style={{ maxWidth: "100%" }}
+                    src="./assets/images/posts.jpg"
+                  />
+                  <span>Login</span>
+                </Link>
+              </div>
+              <div
+                style={{ background: "white" }}
+                className="col-md-6 mb-4 p-0 m-0 image-wrapper"
+              >
+                <Link to="/register" className="link">
+                  <img
+                    src="./assets/images/chat.jpg"
+                    style={{ maxWidth: "100%" }}
+                  />
+                  Sign up
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

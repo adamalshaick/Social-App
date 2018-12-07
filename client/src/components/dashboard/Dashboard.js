@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import ProfileActions from "./ProfileActions";
+import ProfileHeader from "../profile/ProfileHeader";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -27,10 +28,7 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p>
-              Welcome <Link to={"/profile/${profile.handle}"}>{user.name}</Link>
-            </p>
-            <ProfileActions />
+            <ProfileHeader profile={profile} />
             <div style={{ marginBottom: "60px" }}>
               <button
                 onClick={this.onDeleteClick.bind(this)}
@@ -38,6 +36,7 @@ class Dashboard extends Component {
               >
                 Delete My Account
               </button>
+              <ProfileActions />
             </div>
           </div>
         );
@@ -57,10 +56,7 @@ class Dashboard extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <p>Dashboard</p>
-            {dashboardContent}
-          </div>
+          <div className="col-md-12">{dashboardContent}</div>
         </div>
       </div>
     );

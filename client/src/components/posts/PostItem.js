@@ -53,6 +53,7 @@ class PostItem extends Component {
                   type="button"
                   className="btn btn-info mr-1"
                 >
+                  <i className="fas fa-thumbs-up" />
                   <span className="badge badge-light">{post.likes.length}</span>
                 </button>
                 <button
@@ -60,7 +61,7 @@ class PostItem extends Component {
                   type="button"
                   className="btn btn-info mr-1"
                 >
-                  <span className="badge badge-light">{post.likes.length}</span>
+                  <i className="fas fa-thumbs-down" />
                 </button>
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   Comments
