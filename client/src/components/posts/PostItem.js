@@ -33,7 +33,7 @@ class PostItem extends Component {
     return (
       <div className="card card-body mb-3">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-3">
             <Link to="">
               <img
                 className="rounded-circle d-none d-md-block"
@@ -43,11 +43,10 @@ class PostItem extends Component {
             </Link>
             <p className="text-center">{post.name}</p>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{post.text}</p>
+          <div className="col-md-9">
+            <p className="lead float-left">{post.text}</p>
             {showActions ? (
-              <span>
-                {" "}
+              <div className="float-right">
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
@@ -66,6 +65,7 @@ class PostItem extends Component {
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   Comments
                 </Link>
+
                 {post.user === auth.user.id ? (
                   <button
                     onClick={this.onDeleteClick.bind(this, post._id)}
@@ -75,7 +75,7 @@ class PostItem extends Component {
                     Delete
                   </button>
                 ) : null}
-              </span>
+              </div>
             ) : null}
           </div>
         </div>
