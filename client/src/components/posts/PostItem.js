@@ -46,7 +46,7 @@ class PostItem extends Component {
           <div className="col-md-9">
             <p className="lead float-left">{post.text}</p>
             {showActions ? (
-              <div className="float-right">
+              <div style={{ position: "absolute", bottom: "0", right: "0" }}>
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
