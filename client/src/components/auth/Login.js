@@ -46,28 +46,32 @@ class Login extends Component {
 
     return (
       <div className="container">
-        <h1>Login</h1>
-        <form onSubmit={this.onSubmit}>
-          <TextFieldGroup
-            placeholder="Email Adress"
-            name="email"
-            type="email"
-            value={this.state.email}
-            onChange={this.onChange}
-            error={errors.email}
-          />
+        <div className="row mt-5">
+          <div className="col-md-8 mt-5">
+            <h1>Login</h1>
+            <form onSubmit={this.onSubmit}>
+              <TextFieldGroup
+                placeholder="Email Adress"
+                name="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.onChange}
+                error={errors.email}
+              />
 
-          <TextFieldGroup
-            placeholder="Password"
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.onChange}
-            error={errors.password}
-          />
+              <TextFieldGroup
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChange}
+                error={errors.password}
+              />
 
-          <input type="submit" className="btn btn-info btn-block mt-4" />
-        </form>
+              <input type="submit" className="btn btn-primary btn-block mt-4" />
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

@@ -17,17 +17,17 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/profiles">
+          <Link className="nav-link text-white" to="/profiles">
             Profiles
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/feed">
+          <Link className="nav-link text-white" to="/feed">
             Post Feed
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
+          <Link className="nav-link text-white" to="/dashboard">
             Dashboard
           </Link>
         </li>
@@ -35,7 +35,7 @@ class Navbar extends Component {
           <a
             href=""
             onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
+            className="nav-link text-white"
           >
             <img
               src={user.avatar}
@@ -51,12 +51,12 @@ class Navbar extends Component {
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/login">
+          <Link className="nav-link text-white" to="/login">
             Login
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/register">
+          <Link className="nav-link text-white" to="/register">
             Sign Up
           </Link>
         </li>
@@ -64,7 +64,7 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-sm navbar-primary bg-primary">
         {isAuthenticated ? authLinks : guestLinks}
       </nav>
     );
