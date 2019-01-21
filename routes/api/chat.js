@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const socket = require("socket.io");
+
+socket.on("connection", function() {});
 
 // Load Message Model
 const Message = require("../../models/Message");
@@ -18,3 +21,5 @@ router.post("/", (req, res) => {
     res.sendStatus(200);
   });
 });
+
+module.exports = router;

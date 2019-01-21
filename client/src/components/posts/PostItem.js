@@ -50,7 +50,7 @@ class PostItem extends Component {
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-info mr-1"
+                  className="btn btn-primary mr-1"
                 >
                   <i className="fas fa-thumbs-up mr-2" />
 
@@ -59,11 +59,11 @@ class PostItem extends Component {
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-info mr-1"
+                  className="btn btn-primary mr-1"
                 >
                   <i className="fas fa-thumbs-down" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                <Link to={`/post/${post._id}`} className="btn btn-primary mr-1">
                   Comments
                 </Link>
 
