@@ -1,24 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
 .landing-page {
 }
 
-.landing-image {
-  height: 100vh;
-  width: 100%;
-  background: url("./images/background.jpg");
-  background-position: fixed no-repeat;
-  background-size: cover;
-  filter: blur(3px);
-  position: absolute;
-  top: 0;
-  z-index: -1;
+.entry {
+  animation: entry 0.75s;
 }
 
-p {
-  font-weight: bold;
+.entry-2x {
+  animation: entry 1.5s;
 }
 
-.image-wrapper {
-  border-radius: 5px;
-  border: black solid 1px;
-  margin: 100px;
+.link {
+  color: black;
+}
+
+.link:hover {
+  color: blue;
+  text-decoration: none;
+  transition: all 0.4s;
+  /* text-decoration: underline; */
+}
+
+@keyframes entry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
