@@ -4,6 +4,31 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
+import styled from "styled-components";
+
+const StyledNavbar = styled.header`
+  width: 100%;
+  height: 6rem;
+  box-shadow: 0px 8px 20px 0px rgba(204, 204, 204, 0.7);
+  color: white;
+  display: flex;
+`;
+
+const List = styled.ul`
+  display: flex;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  margin-top: 1.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+`;
+
+const ListElement = styled.li`
+  color: black;
+  margin: 0 4rem 4rem 0;
+  list-style: none;
+`;
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -14,59 +39,56 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
+
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/profiles">
+      <List>
+        <ListElement>
+          <Link className="link" to="/Profiles">
             Profiles
           </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/feed">
-            Post Feed
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/dashboard">
+        </ListElement>
+        <ListElement>
+          <Link className="link" to="/dashboard">
             Dashboard
           </Link>
-        </li>
-        <li className="nav-item">
-          <a
-            href=""
-            onClick={this.onLogoutClick.bind(this)}
-            className="nav-link text-white"
-          >
+        </ListElement>
+        <ListElement>
+          <Link className="link" to="/feed">
+            Post Feed
+          </Link>
+        </ListElement>
+        <ListElement>
+          <Link className="link" to="/" onClick={this.onLogoutClick.bind(this)}>
+            Logout
             <img
               src={user.avatar}
               alt={user.name}
-              style={{ width: "25px", marginRight: "5px" }}
+              style={{ width: "35px", marginLeft: "5px" }}
             />
-            Logout
-          </a>
-        </li>
-      </ul>
+          </Link>
+        </ListElement>
+      </List>
     );
 
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/login">
+      <List>
+        <ListElement>
+          <Link className="link" to="/login">
             Login
           </Link>
-        </li>
-        <li>
-          <Link className="nav-link text-white" to="/register">
+        </ListElement>
+        <ListElement>
+          <Link className="link" to="/register">
             Sign Up
           </Link>
-        </li>
-      </ul>
+        </ListElement>
+      </List>
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-primary bg-primary">
+      <StyledNavbar className="text-center">
         {isAuthenticated ? authLinks : guestLinks}
-      </nav>
+      </StyledNavbar>
     );
   }
 }

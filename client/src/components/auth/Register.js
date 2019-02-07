@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Register extends Component {
+export class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,6 +33,7 @@ class Register extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -47,45 +49,69 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
-      <div className="container">
-        <h1>Sign Up</h1>
-        <form noValidate onSubmit={this.onSubmit}>
-          <TextFieldGroup
-            placeholder="Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.onChange}
-            error={errors.name}
-          />
-          <TextFieldGroup
-            placeholder="Email"
-            name="email"
-            type="email"
-            value={this.state.email}
-            onChange={this.onChange}
-            error={errors.email}
-          />
-          <TextFieldGroup
-            placeholder="Password"
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.onChange}
-            error={errors.password}
-          />
-          <TextFieldGroup
-            placeholder="Confirm Password"
-            name="password2"
-            type="password"
-            value={this.state.password2}
-            onChange={this.onChange}
-            error={errors.password2}
-          />
-          <input type="submit" className="btn btn-primary btn-block mt-4" />
-        </form>
-      </div>
+      <>
+        <div className="row mt-5">
+          <div className="col-md-2 col-lg-3" />
+          <div
+            style={{
+              boxShadow:
+                "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+            }}
+            className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry"
+          >
+            <div className="card-body p-5">
+              <h3 className="mb-5">Sign up</h3>
+              <form noValidate onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  id="name"
+                  placeholder="Name"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.onChange}
+                  error={errors.name}
+                />
+                <TextFieldGroup
+                  id="email"
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                />
+                <TextFieldGroup
+                  id="password"
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.password}
+                />
+                <TextFieldGroup
+                  id="password2"
+                  placeholder="Confirm Password"
+                  name="password2"
+                  type="password"
+                  value={this.state.password2}
+                  onChange={this.onChange}
+                  error={errors.password2}
+                />
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                >
+                  Create Account
+                </button>
+              </form>
+            </div>
+            <div className="text-muted card-footer mt-3">
+              Already have an account? <Link to="/login">Log in</Link>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
