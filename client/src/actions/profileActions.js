@@ -6,7 +6,8 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER,
-  GET_PROFILES
+  GET_PROFILES,
+  ADD_FRIEND
 } from "./types";
 
 // Get profile by handle
@@ -95,6 +96,56 @@ export const getProfiles = () => dispatch => {
       dispatch({
         type: GET_PROFILES,
         payload: null
+      })
+    );
+};
+
+// Add Friend
+export const addFriend = id => dispatch => {
+  axios
+    .post(`./api/friends/${id}`)
+    .then(res => dispatch(getProfiles()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Send friend request
+export const sendFriendRequest = id => dispatch => {
+  axios
+    .post(`./api/friends/request/${id}`)
+    .then(res => dispatch(getProfiles()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const acceptRequest = id => dispatch => {
+  axios
+    .post(`./api/friends/request/accept/${id}`)
+    .then(res => dispatch(getProfiles()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const declineRequest = id => dispatch => {
+  axios
+    .post(`./api/friends/request/decline/${id}`)
+    .then(res => dispatch(getProfiles()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
