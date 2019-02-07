@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
+import Loading from "../common/Loading";
+import Header from "../common/Header";
 
 class Profiles extends Component {
   componentDidMount() {
@@ -10,30 +12,31 @@ class Profiles extends Component {
   }
   render() {
     const { profiles, loading } = this.props.profile;
+    const { auth } = this.props;
     let profileItems;
 
     if (profiles === null || loading) {
-      profileItems = "Loading...";
+      profileItems = <Loading />;
     } else {
       if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (
-          <ProfileItem key={profile._id} profile={profile} />
-        ));
+        profileItems = profiles.reduce((profileItems, profile) => {
+          if (profile.user._id !== auth.user.id) {
+            profileItems.push(
+              <ProfileItem key={profile._id} profile={profile} />
+            );
+          }
+          return profileItems;
+        }, []);
       } else {
         profileItems = <div>No profiles found</div>;
       }
     }
+
     return (
-      <div className="profiles">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4 text-center">Profiles</h1>
-              {profileItems}
-            </div>
-          </div>
-        </div>
-      </div>
+      <>
+        <Header text={"Profiles"} />
+        <div className="mt-5">{profileItems}</div>
+      </>
     );
   }
 }
@@ -44,7 +47,8 @@ Profiles.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
 export default connect(
