@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PostForm from "./PostForm.js";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "./PostFeed";
+import Loading from "../common/Loading.js";
 
 class Posts extends Component {
   componentDidMount() {
@@ -15,21 +16,17 @@ class Posts extends Component {
     let postContent;
 
     if (posts === null || loading) {
-      postContent = <p>Loading ...</p>;
+      postContent = <Loading />;
     } else {
       postContent = <PostFeed posts={posts} />;
     }
 
     return (
-      <div className="feed">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h2>Posts</h2>
-              <PostForm />
-              {postContent}
-            </div>
-          </div>
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <h2>Posts</h2>
+          <PostForm />
+          {postContent}
         </div>
       </div>
     );

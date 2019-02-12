@@ -4,6 +4,13 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
+import styled from "styled-components";
+
+const Post = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+  border-radius: 2rem;
+`;
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -31,7 +38,7 @@ class PostItem extends Component {
     const { post, auth, showActions } = this.props;
 
     return (
-      <div className="card card-body mb-3">
+      <Post className=" mb-3">
         <div className="row">
           <div className="col-md-3">
             <Link to="">
@@ -80,7 +87,7 @@ class PostItem extends Component {
             ) : null}
           </div>
         </div>
-      </div>
+      </Post>
     );
   }
 }

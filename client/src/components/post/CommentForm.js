@@ -42,8 +42,8 @@ class CommentForm extends Component {
     const { errors } = this.state;
     return (
       <div className="post-form mb-3">
-        <div className="card card-info">
-          <div className="card-header bg-info text-white">Reply to post</div>
+        <div className="card card-primary">
+          <div className="card-header bg-primary text-white">Reply to post</div>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <TextAreaFieldGroup
@@ -55,7 +55,7 @@ class CommentForm extends Component {
                 error={errors.text}
               />
             </div>
-            <button type="submit" className="btn btn-info">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>

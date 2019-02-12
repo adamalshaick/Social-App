@@ -54,7 +54,7 @@ class PostForm extends Component {
                 error={errors.text}
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary float-right">
               Submit
             </button>
           </form>
