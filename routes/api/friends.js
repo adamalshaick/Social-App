@@ -25,12 +25,25 @@ router.post(
     Profile.findOne({ user: req.params.id })
       .then(profile => {
         const friendContent = {
-          user: req.user.id, //?
+          user: req.user.id,
           avatar: req.body.avatar,
           handle: req.body.handle
         };
-        profile.friendRequests.unshift(friendContent);
-        profile.save().then(profile => res.json(profile));
+
+        if (
+          profile.friendRequests.filter(request => request.user === req.user.id)
+            .length === 0
+        ) {
+          return res
+            .status(400)
+            .json({ repeatedrequest: "request already exists" });
+        } else {
+          profile.friendRequests.unshift(friendContent);
+          profile.save().then(profile => res.json(profile));
+        }
+        // } else {
+
+        // }
       })
       .catch(err => res.status(400).json(err));
   }
