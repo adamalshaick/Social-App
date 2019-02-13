@@ -38,6 +38,21 @@ class ProfileItem extends Component {
             >
               View Profile
             </Link>
+
+            {profile.friends.filter(
+              friend => friend.user === this.props.usersProfile._id
+            ).length === 0 ? null : (
+              <div>
+                <Link
+                  to="/"
+                  style={{ fontSize: "20px" }}
+                  className="btn btn-warning mt-3"
+                >
+                  Send friend request
+                  <i className="fas fa-arrow-circle-right ml-2" />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
