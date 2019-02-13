@@ -15,24 +15,8 @@ router.get("/", (req, res) => {
     .catch(err => res.status(404).json({ nofriendsfound: "No friends found" }));
 });
 
-// @route POST api/friends/:id
-// @desc Add friend
-// @access Private
-router.post(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        profile.friends.unshift(req.params.id);
-        profile.save().then(profile => res.json(profile));
-      })
-      .catch(err => res.status(400).json(err));
-  }
-);
-
 // @route POST api/friends/request/:id
-// @desc Add friend
+// @desc Create friend request
 // @access Private
 router.post(
   "/request/:id",
@@ -40,7 +24,12 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.params.id })
       .then(profile => {
-        profile.friendRequests.unshift(req.user.id);
+        const friendContent = {
+          user: req.user.id, //?
+          avatar: req.body.avatar,
+          handle: req.body.handle
+        };
+        profile.friendRequests.unshift(friendContent);
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(400).json(err));
@@ -56,14 +45,35 @@ router.post(
   (req, res) => {
     Promise.all([
       Profile.findOne({ user: req.params.id }),
-      Profile.findOne({ user: req.params.id })
+      Profile.findOne({ user: req.user.id })
     ])
       .then(results => {
         const firstProfile = results[0];
         const secondProfile = results[1];
+        const request = {
+          user: req.params.id,
+          avatar: req.body.avatar,
+          handle: req.body.handle
+        };
 
-        firstProfile.friendRequests.unshift(req.user.id);
-        secondProfile.friendRequests.unshift(req.params.id);
+        const accept = {
+          user: req.user.id,
+          avatar: req.body.avatarInput,
+          handle: req.body.handleInput
+        };
+
+        firstProfile.friends.unshift(accept);
+        secondProfile.friends.unshift(request);
+
+        // Get remove index
+        const removeIndex = secondProfile.friendRequests
+          .map(request => request.user.toString())
+          .indexOf(req.params.id);
+
+        //Splice request out of array
+        secondProfile.friendRequests.splice(removeIndex, 1);
+        firstProfile.save().then(profile => res.json(profile));
+        secondProfile.save().then(profile => res.json(profile));
       })
       .catch(err => {
         res.json(err);
@@ -80,18 +90,9 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        // Check to see if there is a friend request
-        if (
-          profile.friendRequests.filter(request => request.id === req.params.id)
-            .length === 0
-        ) {
-          return res
-            .status(404)
-            .json({ requestnotexists: "request doesn't exist" });
-        }
         // Get remove index
         const removeIndex = profile.friendRequests
-          .map(request => request.id)
+          .map(request => request.user.toString())
           .indexOf(req.params.id);
 
         //Splice request out of array
