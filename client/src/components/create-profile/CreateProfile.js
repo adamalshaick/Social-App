@@ -6,6 +6,8 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile } from "../../actions/profileActions";
+import UploadFileGroup from "../common/UploadFileGroup";
+import Navbar from "../layout/Navbar";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class CreateProfile extends Component {
       linkedin: "",
       youtube: "",
       instagram: "",
+      selectedFile: null,
       errors: {}
     };
   }
@@ -30,19 +33,33 @@ class CreateProfile extends Component {
     }
   }
 
+  fileSelectedHandler = e => {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
-    const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
-    };
+    const profileData = new FormData();
+
+    if (this.state.selectedFile) {
+      profileData.append(
+        "myImage",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
+
+    profileData.append("handle", this.state.handle);
+    profileData.append("location", this.state.location);
+    profileData.append("bio", this.state.bio);
+    profileData.append("twitter", this.state.twitter);
+    profileData.append("facebook", this.state.facebook);
+    profileData.append("linkedin", this.state.linkedin);
+    profileData.append("youtube", this.state.youtube);
+    profileData.append("instagram", this.state.instagram);
 
     this.props.createProfile(profileData, this.props.history);
   };
@@ -108,35 +125,58 @@ class CreateProfile extends Component {
     }
 
     return (
-      <div className="create-profile">
-        <div className="container">
+      <>
+        <Navbar />
+        <div className="entry container mt-5">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Add some information about You!
-              </p>
+            <div
+              style={{
+                boxShadow:
+                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                padding: "2rem"
+              }}
+              className="col-md-8 m-auto"
+            >
+              <h1 style={{ fontSize: "1.7rem" }} className="text-center mb-4">
+                Create Your Profile
+              </h1>
+
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile Username"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="Your username"
-                />
-
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="Your Location"
-                />
-
+                <div className="row">
+                  <div className="col-md-6 mb-2">
+                    <UploadFileGroup
+                      error={errors.filename}
+                      icon="fas fa-file-upload fa-8x"
+                      type="file"
+                      name="file"
+                      onChange={this.fileSelectedHandler}
+                      info="* Profile Image"
+                    />
+                  </div>
+                  <div className="col-md-6 mt-5">
+                    <TextFieldGroup
+                      id="handle"
+                      placeholder="* Profile Handle"
+                      name="handle"
+                      value={this.state.handle}
+                      onChange={this.onChange}
+                      error={errors.handle}
+                      info="Your username"
+                    />
+                    <TextFieldGroup
+                      id="location"
+                      placeholder="Location"
+                      name="location"
+                      value={this.state.location}
+                      onChange={this.onChange}
+                      error={errors.location}
+                      info="Your Location"
+                    />
+                  </div>
+                </div>
                 <TextAreaFieldGroup
+                  id="bio"
                   placeholder="Short Bio"
                   name="bio"
                   value={this.state.bio}
@@ -157,19 +197,19 @@ class CreateProfile extends Component {
                   >
                     Add Social Media Links
                   </button>
-                  <span className="text-muted">Optional</span>
+                  <small className="text-muted d-block">(Optional)</small>
                 </div>
                 {socialInputs}
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-primary float-right mt-4"
                 />
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
