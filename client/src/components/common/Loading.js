@@ -53,10 +53,10 @@ const Dot = styled.span`
 
 const Loading = () => {
   return (
-    <>
+    <div className="entry">
       <Loader>LOADING</Loader>
       <Dot>.</Dot>
-    </>
+    </div>
   );
 };
 
