@@ -40,25 +40,25 @@ class PostForm extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="post-form mb-3">
-        <div className="card">
-          <div className="card-header bg-primary text-white">Create a post</div>
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <TextAreaFieldGroup
-                className="form-control form-control-lg"
-                placeholder="Say Something..."
-                name="text"
-                value={this.state.text}
-                onChange={this.onChange}
-                error={errors.text}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary float-right">
-              Submit
-            </button>
-          </form>
-        </div>
+      <div className="mb-3">
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <TextAreaFieldGroup
+              className="form-control form-control-lg"
+              placeholder="Say Something..."
+              name="text"
+              value={this.state.text}
+              onChange={this.onChange}
+              error={errors.text}
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-outline-primary btn-sm float-right"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     );
   }

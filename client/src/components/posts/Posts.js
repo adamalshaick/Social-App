@@ -22,12 +22,9 @@ class Posts extends Component {
     }
 
     return (
-      <div className="row">
-        <div className="col-md-12 text-center">
-          <h2>Posts</h2>
-          <PostForm />
-          {postContent}
-        </div>
+      <div>
+        <PostForm />
+        <div className="mt-5">{postContent}</div>
       </div>
     );
   }

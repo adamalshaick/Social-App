@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
-import styled from "styled-components";
-
-const Post = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 2rem;
-  border-radius: 2rem;
-`;
+import CommentForm from "../post/CommentForm";
+import CommentFeed from "../post/CommentFeed";
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -35,59 +29,65 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth, showActions } = this.props;
+    const { post, auth } = this.props;
 
     return (
-      <Post className=" mb-3">
-        <div className="row">
-          <div className="col-md-3">
-            <Link to="">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={post.avatar}
-                alt=""
-              />
-            </Link>
-            <p className="text-center">{post.name}</p>
-          </div>
-          <div className="col-md-9">
-            <p className="lead float-left">{post.text}</p>
-            {showActions ? (
-              <div style={{ position: "absolute", bottom: "0", right: "0" }}>
-                <button
-                  onClick={this.onLikeClick.bind(this, post._id)}
-                  type="button"
-                  className="btn btn-primary mr-1"
-                >
-                  <i className="fas fa-thumbs-up mr-2" />
-
-                  <span className="badge badge-light">{post.likes.length}</span>
-                </button>
-                <button
-                  onClick={this.onUnlikeClick.bind(this, post._id)}
-                  type="button"
-                  className="btn btn-primary mr-1"
-                >
-                  <i className="fas fa-thumbs-down" />
-                </button>
-                <Link to={`/post/${post._id}`} className="btn btn-primary mr-1">
-                  Comments
-                </Link>
-
-                {post.user === auth.user.id ? (
-                  <button
-                    onClick={this.onDeleteClick.bind(this, post._id)}
-                    type="button"
-                    className="btn btn-danger mr-1"
-                  >
-                    Delete
-                  </button>
-                ) : null}
-              </div>
-            ) : null}
+      <div className="row">
+        <div className="row mt-3">
+          <Link to="">
+            <img
+              style={{ width: "40px" }}
+              className="rounded-circle  ml-4"
+              src={post.avatar}
+              alt=""
+            />
+          </Link>
+          <div className="text-center mt-2 ml-2 ">{post.name}</div>
+        </div>
+        <div className="col-12">
+          <div style={{ fontSize: "0.9rem" }} className="float-left ml-2">
+            {post.text}
           </div>
         </div>
-      </Post>
+        <div className="mt-2 ml-3">
+          <button
+            onClick={this.onLikeClick.bind(this, post._id)}
+            type="button"
+            className="btn btn-outline-success btn-sm mr-1"
+          >
+            <i className="fas fa-thumbs-up mr-2" />
+            <small>{post.likes.length}</small>
+          </button>
+          {post.likes.find(like => like.user === auth.user.id) ? (
+            <button
+              onClick={this.onUnlikeClick.bind(this, post._id)}
+              type="button"
+              className="btn  btn-outline-danger btn-sm mr-1"
+            >
+              <i className="fas fa-thumbs-down" />
+            </button>
+          ) : null}
+
+          {post.user === auth.user.id ? (
+            <button
+              onClick={this.onDeleteClick.bind(this, post._id)}
+              type="button"
+              className="btn btn-outline-danger btn-sm mr-1"
+            >
+              Delete
+            </button>
+          ) : null}
+
+          <div className="mt-2 ml-lg-4">
+            <CommentFeed
+              style={{ width: "100%" }}
+              postId={post._id}
+              comments={post.comments}
+            />
+            <CommentForm style={{ width: "100%" }} postId={post._id} />
+          </div>
+        </div>
+      </div>
     );
   }
 }
