@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="input-group mt-3"
+>
+  <div
+    className="input-group-prepend"
+  >
+    <div
+      className=" text-center"
+    >
+      <i
+        className="undefined mb-2  mt-3"
+      />
+      <div
+        className="text-center"
+      />
+      <input
+        className="form-control"
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
+        type="file"
+      />
+    </div>
+  </div>
+</div>
+`;

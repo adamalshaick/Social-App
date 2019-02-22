@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="form-group"
+>
+  <textarea
+    className="form-control form-control-lg"
+  />
+</div>
+`;
