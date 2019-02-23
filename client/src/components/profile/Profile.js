@@ -2,9 +2,27 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ProfileHeader from "./ProfileHeader";
-import ProfileAbout from "./ProfileAbout";
 import { getProfileByHandle } from "../../actions/profileActions";
+import Loading from "../common/Loading";
+import ProfileContent from "./ProfileContent";
+import Navbar from "../layout/Navbar";
+import styled, { keyframes } from "styled-components";
+
+const entry = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
+const ProfilePage = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+  animation: ${entry} 0.75s;
+`;
 
 class Profile extends Component {
   componentDidMount() {
@@ -15,37 +33,27 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profile;
+    const { user } = this.props.auth;
     let profileContent;
 
     if (profile === null || loading) {
-      profileContent = "Loading...";
+      profileContent = <Loading />;
     } else {
       profileContent = (
-        <div>
-          <div className="row">
-            <div className="col-md-6">
-              <Link
-                to="/profiles"
-                className="btn btn-dark mb-3 mt-3 float-left"
-              >
-                Back To Profiles
-              </Link>
-            </div>
-            <div className="col-md-6" />
+        <div className="container">
+          <div className="row mt-5">
+            <ProfilePage>
+              <ProfileContent profile={profile} user={user} />;
+            </ProfilePage>
           </div>
-          <ProfileHeader profile={profile} />
-          <ProfileAbout profile={profile} />
         </div>
       );
     }
     return (
-      <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{profileContent}</div>
-          </div>
-        </div>
-      </div>
+      <>
+        <Navbar />
+        {profileContent}
+      </>
     );
   }
 }
@@ -56,7 +64,8 @@ Profile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
 export default connect(
