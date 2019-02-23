@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div>
+  <div
+    className="text-center"
+  >
+    <p>
+      <i>
+        You didn't add any friend yet
+      </i>
+    </p>
+    <Link
+      className="btn btn-outline-dark"
+      replace={false}
+      to="/feed"
+    >
+      Browse Profiles
+    </Link>
+  </div>
+</div>
+`;
