@@ -18,7 +18,7 @@ class CommentItem extends Component {
             <img
               style={{ width: "40px" }}
               className="rounded-circle  ml-4"
-              src={comment.avatar}
+              src={`../uploads/post_image/${profile.profileImage}`}
               alt=""
             />
           </Link>

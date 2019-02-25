@@ -38,7 +38,7 @@ class PostItem extends Component {
             <img
               style={{ width: "40px" }}
               className="rounded-circle  ml-4"
-              src={post.avatar}
+              src={`../uploads/post_image/${profile.profileImage}`}
               alt=""
             />
           </Link>
