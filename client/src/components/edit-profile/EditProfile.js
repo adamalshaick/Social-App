@@ -183,7 +183,7 @@ export class EditProfile extends Component {
 
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                {/* <TextFieldGroup
+                <InputGroup
                   placeholder="* Profile Handle"
                   name="handle"
                   value={this.state.handle}
@@ -192,14 +192,14 @@ export class EditProfile extends Component {
                   info="Your username"
                 />
 
-                <TextFieldGroup
+                <InputGroup
                   placeholder="Location"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
                   info="Your Location"
-                /> */}
+                />
 
                 <TextAreaFieldGroup
                   placeholder="Short Bio"
