@@ -155,7 +155,7 @@ export class CreateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6 mt-5">
-                    {/* <TextFieldGroup
+                    <InputGroup
                       id="handle"
                       placeholder="* Username"
                       name="handle"
@@ -164,7 +164,7 @@ export class CreateProfile extends Component {
                       error={errors.handle}
                       info="Your username"
                     />
-                    <TextFieldGroup
+                    <InputGroup
                       id="location"
                       placeholder="Location"
                       name="location"
@@ -172,7 +172,7 @@ export class CreateProfile extends Component {
                       onChange={this.onChange}
                       error={errors.location}
                       info="Your Location"
-                    /> */}
+                    />
                   </div>
                 </div>
                 <TextAreaFieldGroup

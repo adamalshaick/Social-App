@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-
+import InputGroup from "../common/InputGroup";
 import Navbar from "../layout/Navbar";
 
 export class Login extends Component {
@@ -62,7 +62,7 @@ export class Login extends Component {
               <div className="card-body p-5">
                 <h3 className="mb-5">Log in to your account</h3>
                 <form onSubmit={this.onSubmit}>
-                  {/* <TextFieldGroup
+                  <InputGroup
                     id="#email"
                     placeholder="Email Adress"
                     name="email"
@@ -73,7 +73,7 @@ export class Login extends Component {
                     id="email"
                   />
 
-                  <TextFieldGroup
+                  <InputGroup
                     id="#password"
                     placeholder="Password"
                     name="password"
@@ -82,7 +82,7 @@ export class Login extends Component {
                     onChange={this.onChange}
                     error={errors.password}
                     id="password"
-                  /> */}
+                  />
 
                   <button
                     type="submit"
