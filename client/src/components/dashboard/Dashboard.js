@@ -1,81 +1,112 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import ProfileActions from "./ProfileActions";
-import ProfileHeader from "../profile/ProfileHeader";
+import {
+  getCurrentProfile,
+  acceptRequest,
+  declineRequest,
+  getProfiles
+} from "../../actions/profileActions";
 
-class Dashboard extends Component {
+import { Redirect } from "react-router-dom";
+import styled from "styled-components";
+import ProfileContent from "../profile/ProfileContent";
+import Loading from "../common/Loading";
+import FriendsFeed from "../friends/FriendsFeed";
+import FriendRequests from "../friendRequests/FriendRequests";
+
+import Navbar from "../layout/Navbar";
+
+const Header = styled.header`
+  font-size: 1.5rem;
+  font-weight: 400;
+`;
+
+const Requests = styled.div``;
+
+export class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+    this.props.getProfiles();
   }
 
-  onDeleteClick(e) {
-    this.props.deleteAccount();
+  onAccept(id) {
+    this.props.onAccept(id);
+  }
+
+  onDecline(id) {
+    this.props.onDecline(id);
   }
 
   render() {
+    const { profile, profiles, loading } = this.props.profile;
     const { user } = this.props.auth;
-    const { profile, loading } = this.props.profile;
 
     let dashboardContent;
 
-    if (profile === null || loading) {
-      dashboardContent = <p>Loading...</p>;
+    if (profile === null || profiles === null || loading) {
+      dashboardContent = <Loading />;
     } else {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div>
-            <ProfileHeader profile={profile} />
-            <div style={{ float: "right" }}>
-              <button
-                onClick={this.onDeleteClick.bind(this)}
-                className="btn btn-danger"
-              >
-                Delete My Account
-              </button>
-              <ProfileActions />
+          <>
+            <div className="container entry">
+              {profile.friendRequests && profile.friendRequests.length ? (
+                <Requests>
+                  <FriendRequests profile={profile} profiles={profiles} />
+                </Requests>
+              ) : null}
+
+              <div className="row mt-5">
+                <section
+                  style={{
+                    borderRight: "whitesmoke solid 2px"
+                  }}
+                  className="col-md-6"
+                >
+                  <ProfileContent profile={profile} user={user} />
+                </section>
+                <section className="col-md-6">
+                  <Header className="text-center">Your Friends</Header>
+                  <hr />
+
+                  <FriendsFeed profile={profile} profiles={profiles} />
+                </section>
+              </div>
             </div>
-          </div>
+          </>
         );
       } else {
         // User is logged in but has no profile
-        dashboardContent = (
-          <div>
-            <p> Welcome {user.name}</p>
-            <p> Create a profile</p>
-            <Link to="/create-profile" className="btn btn-lg btn-primary">
-              Create profile
-            </Link>
-          </div>
-        );
+        return <Redirect to="/create-profile" />;
       }
     }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">{dashboardContent}</div>
-        </div>
-      </div>
+      <>
+        <Navbar />
+        {dashboardContent}
+      </>
     );
   }
 }
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
+  acceptRequest: PropTypes.func.isRequired,
+  declineRequest: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  profiles: state.profile,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount }
+  { getCurrentProfile, getProfiles, acceptRequest, declineRequest }
 )(Dashboard);

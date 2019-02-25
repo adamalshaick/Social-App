@@ -1,6 +1,7 @@
 import React from "react";
 import { Login } from "../../../components/auth/Login";
 import { shallow } from "enzyme";
+import toJson from "enzyme-to-json";
 
 const mockLoginfn = jest.fn();
 const Props = {
@@ -13,13 +14,21 @@ let wrapper;
 
 wrapper = shallow(<Login {...Props} loginUser={mockLoginfn} />);
 
-it("displays form", () => {
-  expect(wrapper.find("form").length).toEqual(1);
+describe("render component", () => {
+  it("renders component", () => {
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });
 
-it("should call the mock login function", () => {
-  wrapper.find("form").simulate("submit", { preventDefault() {} });
-  expect(mockLoginfn.mock.calls.length).toBe(1);
+describe("form test", () => {
+  it("displays form", () => {
+    expect(wrapper.find("form").length).toEqual(1);
+  });
+
+  it("should call the mock login function", () => {
+    wrapper.find("form").simulate("submit", { preventDefault() {} });
+    expect(mockLoginfn.mock.calls.length).toBe(1);
+  });
 });
 
 describe("login action", () => {

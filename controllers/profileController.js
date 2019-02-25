@@ -29,34 +29,42 @@ module.exports = {
         // Return any errors with 400 status
         return res.status(400).json(errors);
       }
-      const profileFields = profileService.getFields(
+
+      let file;
+      if (req.file) {
+        file = req.file.filename;
+      } else {
+        file = "placeholder.png";
+      }
+
+      const createFields = profileService.createFields(
         req.user.id,
         req.body,
-        req.file.filename
+        file
       );
+
+      const updateFields = profileService.updateFields(req.user.id, req.body);
 
       Profile.findOne({ user: req.user.id }).then(profile => {
         if (profile) {
           //Update
           Profile.findOneAndUpdate(
             { user: req.user.id },
-            { $set: profileFields },
+            { $set: updateFields },
             { new: true }
           ).then(profile => res.json(profile));
         } else {
           // Create
 
           // Check if handle exists
-          Profile.findOne({ handle: profileFields.handle }).then(profile => {
+          Profile.findOne({ handle: createFields.handle }).then(profile => {
             if (profile) {
               errors.handle = "That handle already exists";
               res.status(400).json(errors);
             }
 
             // Save Profile
-            new Profile(profileFields)
-              .save()
-              .then(profile => res.json(profile));
+            new Profile(createFields).save().then(profile => res.json(profile));
           });
         }
       });

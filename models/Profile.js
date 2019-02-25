@@ -8,20 +8,13 @@ const ProfileSchema = new Schema({
     ref: "users"
   },
 
-  friends: [
-    {
-      user: { type: Schema.Types.ObjectId, ref: "users" },
-      handle: { type: String, required: true },
-      avatar: { type: String, required: true }
-    }
-  ],
-  friendRequests: [
-    {
-      user: { type: Schema.Types.ObjectId, ref: "users" },
-      handle: { type: String, required: true },
-      avatar: { type: String, required: true }
-    }
-  ],
+  profileImage: {
+    type: String
+  },
+
+  friends: [{ type: Schema.Types.ObjectId, ref: "users" }],
+
+  friendRequests: [{ type: Schema.Types.ObjectId, ref: "users" }],
 
   handle: {
     type: String,

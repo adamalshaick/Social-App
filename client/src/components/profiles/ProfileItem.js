@@ -6,55 +6,52 @@ import { sendFriendRequest } from "../../actions/profileActions";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
+const Card = styled.div`
+  &:hover {
+    filter: brightness(80%);
+  }
+  transition: filter 0.5s;
+`;
+
 class ProfileItem extends Component {
+  onRequest(id) {
+    this.props.sendFriendRequest(id);
+  }
+
   render() {
-    const { profile } = this.props;
+    const { profile, auth } = this.props;
     return (
-      <div
-        style={{
-          backgroundColor: "whitesmoke",
-          borderRadius: "5px",
-          boxShadow:
-            "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-        }}
-        className="bg-light mb-3 p-5"
-      >
-        <div className="row">
-          <div className="col-md-3">
-            <img src={profile.user.avatar} alt="" />
-          </div>
+      <div className="card col-12 col-xl-6">
+        <Card className="text-center p-1">
+          <Link to={`/profile/${profile.handle}`}>
+            <div>
+              {profile.friends.find(friend => friend === auth.user.id) ? (
+                <i
+                  style={{ color: "lightgreen" }}
+                  className="far fa-check-circle mr-2"
+                />
+              ) : null}
 
-          <div className="text-right col-9">
-            <div style={{ fontSize: "25px" }}>{profile.user.name}</div>
-            <p>
-              {isEmpty(profile.location) ? null : (
-                <span style={{ fontSize: "20px" }}>{profile.location}</span>
-              )}
-            </p>
-            <Link
-              style={{ fontSize: "20px" }}
-              to={`/profile/${profile.handle}`}
-              className="btn btn-primary mt-3"
+              {profile.handle}
+            </div>
+
+            <img
+              style={{ height: "200px", width: "200px" }}
+              src={`../uploads/post_image/${profile.profileImage}`}
+            />
+          </Link>
+        </Card>
+        {profile.friends.find(friend => friend === auth.user.id) ? null : (
+          <div className="text-center">
+            <button
+              className="btn btn-outline-primary btn-sm mt-3"
+              onClick={this.onRequest.bind(this, profile.user._id)}
             >
-              View Profile
-            </Link>
-
-            {profile.friends.filter(
-              friend => friend.user === this.props.usersProfile._id
-            ).length === 0 ? null : (
-              <div>
-                <Link
-                  to="/"
-                  style={{ fontSize: "20px" }}
-                  className="btn btn-warning mt-3"
-                >
-                  Send friend request
-                  <i className="fas fa-arrow-circle-right ml-2" />
-                </Link>
-              </div>
-            )}
+              Send friend request
+              <i className="fas fa-arrow-circle-right ml-2" />
+            </button>
           </div>
-        </div>
+        )}
       </div>
     );
   }

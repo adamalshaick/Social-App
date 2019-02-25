@@ -100,19 +100,6 @@ export const getProfiles = () => dispatch => {
     );
 };
 
-// Add Friend
-export const addFriend = id => dispatch => {
-  axios
-    .post(`./api/friends/${id}`)
-    .then(res => dispatch(getProfiles()))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 // Send friend request
 export const sendFriendRequest = id => dispatch => {
   axios
@@ -126,10 +113,11 @@ export const sendFriendRequest = id => dispatch => {
     );
 };
 
+// Accept friend requst
 export const acceptRequest = id => dispatch => {
   axios
     .post(`./api/friends/request/accept/${id}`)
-    .then(res => dispatch(getProfiles()))
+    .then(res => dispatch(getCurrentProfile()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -138,10 +126,11 @@ export const acceptRequest = id => dispatch => {
     );
 };
 
+// Decline friend request
 export const declineRequest = id => dispatch => {
   axios
     .post(`./api/friends/request/decline/${id}`)
-    .then(res => dispatch(getProfiles()))
+    .then(res => dispatch(getCurrentProfile()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

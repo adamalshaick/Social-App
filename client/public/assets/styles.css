@@ -20,10 +20,7 @@ body {
 }
 
 .link:hover {
-  color: blue;
-  text-decoration: none;
-  transition: all 0.4s;
-  /* text-decoration: underline; */
+  color: black;
 }
 
 @keyframes entry {
@@ -31,6 +28,90 @@ body {
     opacity: 0;
   }
   to {
+    opacity: 1;
+  }
+}
+
+@keyframes image-cover {
+  0% {
+    width: 0;
+    transform: translateX(0);
+  }
+
+  50% {
+    width: 550px;
+    transform: translateX(0);
+  }
+
+  100% {
+    width: 0px;
+    transform: translateX(550px);
+  }
+}
+
+.landing-image {
+  animation: landing-image 1.9s;
+}
+
+@keyframes landing-image {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.image-cover {
+  animation: image-cover 1.5s cubic-bezier(0.19, 1, 0.2, 1) forwards;
+  width: 0px;
+  position: absolute;
+  left: 44%;
+  top: 31%;
+}
+
+@keyframes text-cover {
+  0% {
+    width: 0;
+    transform: translateX(0);
+  }
+
+  50% {
+    width: 305px;
+    transform: translateX(0);
+  }
+
+  100% {
+    width: 0px;
+    transform: translateX(305px);
+  }
+}
+
+.text-cover {
+  width: 0px;
+  animation: text-cover 1.5s cubic-bezier(0.19, 1, 0.2, 1) forwards;
+  animation-delay: 1s;
+}
+
+.landing-text {
+  animation: landing-text 2.9s;
+}
+
+@keyframes landing-text {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
     opacity: 1;
   }
 }

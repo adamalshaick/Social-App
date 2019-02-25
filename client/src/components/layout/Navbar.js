@@ -9,9 +9,9 @@ import styled from "styled-components";
 const StyledNavbar = styled.header`
   width: 100%;
   height: 6rem;
-  box-shadow: 0px 8px 20px 0px rgba(204, 204, 204, 0.7);
-  color: white;
   display: flex;
+  box-shadow: ${props =>
+    props.landing ? "none" : "0px 8px 20px 0px rgba(204, 204, 204, 0.7)"};
 `;
 
 const List = styled.ul`
@@ -20,14 +20,20 @@ const List = styled.ul`
   right: 50%;
   transform: translateX(50%);
   margin-top: 1.8rem;
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const ListElement = styled.li`
-  color: black;
-  margin: 0 4rem 4rem 0;
+  margin: 0 2rem 2rem 0;
   list-style: none;
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+    margin: 0 4rem 4rem 0;
+  }
 `;
 
 class Navbar extends Component {
@@ -43,28 +49,23 @@ class Navbar extends Component {
     const authLinks = (
       <List>
         <ListElement>
-          <Link className="link" to="/Profiles">
-            Profiles
-          </Link>
-        </ListElement>
-        <ListElement>
-          <Link className="link" to="/dashboard">
+          <Link style={{ color: "black" }} className="link" to="/dashboard">
             Dashboard
           </Link>
         </ListElement>
         <ListElement>
-          <Link className="link" to="/feed">
-            Post Feed
+          <Link style={{ color: "black" }} className="link" to="/feed">
+            Posts
           </Link>
         </ListElement>
         <ListElement>
-          <Link className="link" to="/" onClick={this.onLogoutClick.bind(this)}>
+          <Link
+            style={{ color: "black" }}
+            className="link"
+            to="/"
+            onClick={this.onLogoutClick.bind(this)}
+          >
             Logout
-            <img
-              src={user.avatar}
-              alt={user.name}
-              style={{ width: "35px", marginLeft: "5px" }}
-            />
           </Link>
         </ListElement>
       </List>
@@ -84,12 +85,22 @@ class Navbar extends Component {
         </ListElement>
       </List>
     );
+    let navbar;
+    {
+      this.props.landing
+        ? (navbar = (
+            <StyledNavbar landing className="text-center">
+              {isAuthenticated ? authLinks : guestLinks}
+            </StyledNavbar>
+          ))
+        : (navbar = (
+            <StyledNavbar className="text-center">
+              {isAuthenticated ? authLinks : guestLinks}
+            </StyledNavbar>
+          ));
+    }
 
-    return (
-      <StyledNavbar className="text-center">
-        {isAuthenticated ? authLinks : guestLinks}
-      </StyledNavbar>
-    );
+    return navbar;
   }
 }
 

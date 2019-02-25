@@ -92,7 +92,7 @@ describe("deleting posts actions", () => {
   };
 
   it("deletes a post", async () => {
-    httpMock.onDelete(`/api/items/${id}`).reply(200, {
+    httpMock.onDelete(`/api/posts/${id}`).reply(200, {
       id
     });
 

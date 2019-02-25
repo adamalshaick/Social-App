@@ -31,6 +31,12 @@ class Profile extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profile.profile === null && this.props.profile.loading) {
+      this.props.history.push("/not-found");
+    }
+  }
+
   render() {
     const { profile, loading } = this.props.profile;
     const { user } = this.props.auth;
@@ -40,12 +46,10 @@ class Profile extends Component {
       profileContent = <Loading />;
     } else {
       profileContent = (
-        <div className="container">
-          <div className="row mt-5">
-            <ProfilePage>
-              <ProfileContent profile={profile} user={user} />;
-            </ProfilePage>
-          </div>
+        <div className="container mt-5">
+          <ProfilePage>
+            <ProfileContent profile={profile} user={user} nested={true} />
+          </ProfilePage>
         </div>
       );
     }

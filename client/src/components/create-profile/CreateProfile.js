@@ -9,7 +9,7 @@ import { createProfile } from "../../actions/profileActions";
 import UploadFileGroup from "../common/UploadFileGroup";
 import Navbar from "../layout/Navbar";
 
-class CreateProfile extends Component {
+export class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -146,18 +146,18 @@ class CreateProfile extends Component {
                 <div className="row">
                   <div className="col-md-6 mb-2">
                     <UploadFileGroup
-                      error={errors.filename}
+                      error={errors.file}
                       icon="fas fa-file-upload fa-8x"
                       type="file"
                       name="file"
                       onChange={this.fileSelectedHandler}
-                      info="* Profile Image"
+                      info="Profile Image"
                     />
                   </div>
                   <div className="col-md-6 mt-5">
                     <TextFieldGroup
                       id="handle"
-                      placeholder="* Profile Handle"
+                      placeholder="* Username"
                       name="handle"
                       value={this.state.handle}
                       onChange={this.onChange}
@@ -182,7 +182,7 @@ class CreateProfile extends Component {
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Tell us a little about yourself"
+                  info="Your description"
                 />
 
                 <div className="mb-3">
@@ -193,7 +193,7 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-primary"
+                    className="btn btn-outline-primary"
                   >
                     Add Social Media Links
                   </button>
@@ -203,7 +203,7 @@ class CreateProfile extends Component {
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-primary float-right mt-4"
+                  className="btn btn-outline-primary float-right mt-4"
                 />
               </form>
             </div>

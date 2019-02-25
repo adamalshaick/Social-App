@@ -4,46 +4,42 @@ import PropTypes from "prop-types";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
 import Loading from "../common/Loading";
-import Header from "../common/Header";
+import Navbar from "../layout/Navbar";
 
 class Profiles extends Component {
-  componentDidMount() {
-    this.props.getProfiles();
-  }
   render() {
-    const { profiles, loading } = this.props.profile;
+    const { profiles } = this.props.profile;
     const { auth } = this.props;
     let profileItems;
 
-    if (profiles === null || loading) {
-      profileItems = <Loading />;
+    if (profiles.length > 0) {
+      const usersProfile = profiles.find(profile => {
+        return profile.user._id === auth.user.id;
+      });
+      profileItems = profiles.reduce((profileItems, profile) => {
+        if (profile.user._id !== auth.user.id) {
+          profileItems.push(
+            <ProfileItem
+              key={profile._id}
+              profile={profile}
+              usersProfile={usersProfile}
+            />
+          );
+        }
+        return profileItems;
+      }, []);
     } else {
-      if (profiles.length > 0) {
-        profileItems = profiles.reduce((profileItems, profile) => {
-          if (profile.user._id !== auth.user.id) {
-            profileItems.push(
-              <ProfileItem key={profile._id} profile={profile} />
-            );
-          }
-          return profileItems;
-        }, []);
-      } else {
-        profileItems = <div>No profiles found</div>;
-      }
+      profileItems = <div>No profiles found</div>;
     }
 
-    return (
-      <>
-        <Header text={"Profiles"} />
-        <div className="mt-5">{profileItems}</div>
-      </>
-    );
+    return <div className="row">{profileItems}</div>;
   }
 }
 
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

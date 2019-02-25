@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
-import CommentForm from "../post/CommentForm";
-import CommentFeed from "../post/CommentFeed";
+import CommentForm from "../comments/CommentForm";
+import CommentFeed from "../comments/CommentFeed";
 
 class PostItem extends Component {
   onDeleteClick(id) {

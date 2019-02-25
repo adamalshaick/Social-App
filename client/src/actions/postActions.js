@@ -31,12 +31,7 @@ export const addPost = postData => dispatch => {
 export const addComment = (postId, commentData) => dispatch => {
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
-    .then(res =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data
-      })
-    )
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -49,12 +44,7 @@ export const addComment = (postId, commentData) => dispatch => {
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
     .delete(`/api/posts/comment/${postId}/${commentId}`)
-    .then(res =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data
-      })
-    )
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -67,7 +57,7 @@ export const deleteComment = (postId, commentId) => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get("./api/posts")
+    .get("/api/posts")
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -86,7 +76,7 @@ export const getPosts = () => dispatch => {
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get(`../api/posts/${id}`)
+    .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -104,7 +94,7 @@ export const getPost = id => dispatch => {
 // Delete Post
 export const deletePost = id => dispatch => {
   axios
-    .delete(`./api/posts/${id}`)
+    .delete(`/api/posts/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_POST,

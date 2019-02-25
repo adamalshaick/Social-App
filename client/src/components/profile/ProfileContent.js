@@ -11,8 +11,11 @@ const Header = styled.header`
   font-weight: 400;
 `;
 
-const Button = styled.div`
+const Button = styled.a`
   color: white;
+  &:hover {
+    color: white;
+  }
   width: 120px;
   background-color: ${props =>
     props.fb
@@ -45,50 +48,92 @@ class ProfileContent extends Component {
         </Header>
         <hr />
         <div className="text-center mt-5">
-          <img src={profile.user.avatar} alt="" />
+          <img
+            style={{ width: "250px", height: "250px" }}
+            src={`../uploads/post_image/${profile.profileImage}`}
+            alt=""
+          />
         </div>
         <div className="text-center">
           <strong>{profile.handle}</strong>
         </div>
         <div className="text-center mt-2">
-          <strong>{profile.location}</strong>
+          {isEmpty(profile.location) ? (
+            <i>No location provided</i>
+          ) : (
+            <strong>{profile.location}</strong>
+          )}
         </div>
-        <div className="text-center pr-5 pl-5 mt-2 mb-5">{profile.bio}</div>
+        {isEmpty(profile.bio) ? (
+          <i>No description provided</i>
+        ) : (
+          <div className="text-center pr-5 pl-5 mt-2 mb-5">{profile.bio}</div>
+        )}
+
         <div className="text-center">
           <div>
-            <Button fb className="btn btn-sm mr-3">
-              <i className="fab fa-facebook mr-2" />
-              Facebook
-            </Button>
-            <Button inst className="btn btn-sm">
-              <i className="fab fa-instagram mr-2" />
-              Instagram
-            </Button>
+            {isEmpty(profile.social && profile.social.facebook) ? null : (
+              <Button
+                href={profile.social.facebook}
+                fb
+                className="btn btn-sm mr-3"
+              >
+                <i className="fab fa-facebook mr-2" />
+                Facebook
+              </Button>
+            )}
+            {isEmpty(profile.social && profile.social.instagram) ? null : (
+              <Button
+                href={profile.social.instagram}
+                inst
+                className="btn btn-sm"
+              >
+                <i className="fab fa-instagram mr-2" />
+                Instagram
+              </Button>
+            )}
           </div>
           <div className="mt-2">
-            <Button yt className="btn btn-sm mr-3">
-              <i className="fab fa-youtube mr-2" />
-              YouTube
-            </Button>
-            <Button twit className="btn btn-sm">
-              <i className="fab fa-twitter mr-2" />
-              Twitter
-            </Button>
+            {isEmpty(profile.social && profile.social.youtube) ? null : (
+              <Button
+                href={profile.social.youtube}
+                yt
+                className="btn btn-sm mr-3"
+              >
+                <i className="fab fa-youtube mr-2" />
+                YouTube
+              </Button>
+            )}
+            {isEmpty(profile.social && profile.social.twitter) ? null : (
+              <Button href={profile.social.twitter} twit className="btn btn-sm">
+                <i className="fab fa-twitter mr-2" />
+                Twitter
+              </Button>
+            )}
           </div>
-          <Button linkd className="btn btn-sm mt-2">
-            <i className="fab fa-linkedin mr-2" />
-            LinkedIn
-          </Button>
+          {isEmpty(profile.social && profile.social.linkedin) ? null : (
+            <Button
+              href={profile.social.linkedin}
+              linkd
+              className="btn btn-sm mt-2"
+            >
+              <i className="fab fa-linkedin mr-2" />
+              LinkedIn
+            </Button>
+          )}
         </div>
 
         {profile.user._id === user.id ? (
           <>
-            <div className="btn btn-outline-danger float-right mt-4">
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="btn btn-outline-danger float-right mt-4"
+            >
               Delete Account
-            </div>
+            </button>
             <Link
               to="/edit-profile"
-              className="btn btn-outline-dark float-right mt-4 mr-md-2"
+              className="btn btn-outline-dark float-right mt-4 mr-2"
             >
               Edit Profile
             </Link>

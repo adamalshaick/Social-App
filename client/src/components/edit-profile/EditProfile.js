@@ -7,8 +7,10 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+import Navbar from "../layout/Navbar";
+import UploadFileGroup from "../common/UploadFileGroup";
 
-class CreateProfile extends Component {
+export class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,20 +73,33 @@ class CreateProfile extends Component {
       });
     }
   }
+  fileSelectedHandler = e => {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+  };
 
   onSubmit = e => {
     e.preventDefault();
 
-    const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
-    };
+    const profileData = new FormData();
+
+    if (this.state.selectedFile) {
+      profileData.append(
+        "myImage",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
+
+    profileData.append("handle", this.state.handle);
+    profileData.append("location", this.state.location);
+    profileData.append("bio", this.state.bio);
+    profileData.append("twitter", this.state.twitter);
+    profileData.append("facebook", this.state.facebook);
+    profileData.append("linkedin", this.state.linkedin);
+    profileData.append("youtube", this.state.youtube);
+    profileData.append("instagram", this.state.instagram);
 
     this.props.createProfile(profileData, this.props.history);
   };
@@ -150,11 +165,21 @@ class CreateProfile extends Component {
     }
 
     return (
-      <div className="create-profile">
+      <div className="entry">
+        <Navbar />
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Edit Profile</h1>
+          <div className="row mt-5">
+            <div
+              style={{
+                boxShadow:
+                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                padding: "2rem"
+              }}
+              className="col-md-8 m-auto"
+            >
+              <h1 style={{ fontSize: "1.7rem" }} className="text-center mb-4">
+                Edit Your Profile
+              </h1>
 
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
@@ -193,17 +218,17 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-primary"
+                    className="btn btn-outline-primary"
                   >
                     Add Social Media Links
                   </button>
-                  <div className="text-muted">(Optional)</div>
+                  <small className="text-muted d-block">(Optional)</small>
                 </div>
                 {socialInputs}
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-outline-primary float-right mt-4"
                 />
               </form>
             </div>
@@ -214,7 +239,7 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
@@ -229,4 +254,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createProfile, getCurrentProfile }
-)(withRouter(CreateProfile));
+)(withRouter(EditProfile));
