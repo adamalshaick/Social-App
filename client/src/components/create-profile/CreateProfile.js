@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import TextFieldGroup from "../common/TextFieldGroup";
+// import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile } from "../../actions/profileActions";
@@ -155,7 +155,7 @@ export class CreateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6 mt-5">
-                    <TextFieldGroup
+                    {/* <TextFieldGroup
                       id="handle"
                       placeholder="* Username"
                       name="handle"
@@ -172,7 +172,7 @@ export class CreateProfile extends Component {
                       onChange={this.onChange}
                       error={errors.location}
                       info="Your Location"
-                    />
+                    /> */}
                   </div>
                 </div>
                 <TextAreaFieldGroup

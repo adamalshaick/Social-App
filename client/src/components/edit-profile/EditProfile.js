@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import TextFieldGroup from "../common/TextFieldGroup";
+// import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
@@ -183,7 +183,7 @@ export class EditProfile extends Component {
 
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
+                {/* <TextFieldGroup
                   placeholder="* Profile Handle"
                   name="handle"
                   value={this.state.handle}
@@ -199,7 +199,7 @@ export class EditProfile extends Component {
                   onChange={this.onChange}
                   error={errors.location}
                   info="Your Location"
-                />
+                /> */}
 
                 <TextAreaFieldGroup
                   placeholder="Short Bio"
