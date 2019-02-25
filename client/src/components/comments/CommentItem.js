@@ -14,15 +14,6 @@ class CommentItem extends Component {
     return (
       <div className=" mb-3">
         <div className="row mt-3">
-          <Link to="">
-            <img
-              style={{ width: "40px" }}
-              className="rounded-circle  ml-4"
-              src={`../uploads/post_image/${profile.profileImage}`}
-              alt=""
-            />
-          </Link>
-
           <div className="text-center mt-2 ml-2">{comment.name}</div>
 
           <div className="col-12">
