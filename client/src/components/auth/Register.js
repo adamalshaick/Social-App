@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import TextFieldGroup from "../common/TextFieldGroup";
+// import TextFieldGroup from "../common/TextFieldGroup";
 import Navbar from "../layout/Navbar";
 
 export class Register extends Component {
@@ -66,7 +66,7 @@ export class Register extends Component {
               <div className="card-body p-5">
                 <h3 className="mb-5">Sign up</h3>
                 <form noValidate onSubmit={this.onSubmit}>
-                  <TextFieldGroup
+                  {/* <TextFieldGroup
                     id="name"
                     placeholder="Name"
                     name="name"
@@ -100,7 +100,7 @@ export class Register extends Component {
                     value={this.state.password2}
                     onChange={this.onChange}
                     error={errors.password2}
-                  />
+                  /> */}
                   <button
                     type="submit"
                     className="btn btn-primary btn-block mt-4"
