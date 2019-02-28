@@ -41,7 +41,11 @@ class ProfileItem extends Component {
             />
           </Link>
         </Card>
-        {profile.friends.find(friend => friend === auth.user.id) ? null : (
+        {profile.friends.find(
+          friend => friend === auth.user.id
+        ) ? null : profile.friendRequests.find(
+            request => request === auth.user.id
+          ) ? null : (
           <div className="text-center">
             <button
               className="btn btn-outline-primary btn-sm mt-3"
