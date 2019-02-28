@@ -26,9 +26,9 @@ class CommentItem extends Component {
             <button
               onClick={this.onDeleteClick.bind(this, postId, comment._id)}
               type="button"
-              className="btn btn-outline-danger btn-sm  mr-1"
+              className="btn btn-outline-danger btn-sm mr-1"
             >
-              Delete
+              Delete Comment
             </button>
           ) : null}
         </div>

@@ -42,11 +42,12 @@ class CommentForm extends Component {
       <div className="col-12">
         <form onSubmit={this.onSubmit}>
           <TextAreaFieldGroup
-            className="form-control form-control-lg"
+            className="form-control"
             placeholder="Make a comment..."
             name="text"
             value={this.state.text}
             onChange={this.onChange}
+            style={{ fontSize: "12px", width: "100%" }}
           />
 
           <div className="float-right">

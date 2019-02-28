@@ -21,7 +21,7 @@ class ProfileItem extends Component {
   render() {
     const { profile, auth } = this.props;
     return (
-      <div className="card col-12 col-xl-6">
+      <div className="col-12 col-xl-6">
         <Card className="text-center p-1">
           <Link to={`/profile/${profile.handle}`}>
             <div>
