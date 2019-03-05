@@ -13,17 +13,18 @@ class Posts extends Component {
 
   render() {
     const { posts, loading } = this.props.post;
+    const { profile } = this.props;
     let postContent;
 
     if (posts === null || loading) {
       postContent = <Loading />;
     } else {
-      postContent = <PostFeed posts={posts} />;
+      postContent = <PostFeed posts={posts} profile={profile} />;
     }
 
     return (
       <div>
-        <PostForm />
+        <PostForm profile={profile} />
         <div className="mt-5">{postContent}</div>
       </div>
     );

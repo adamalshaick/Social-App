@@ -77,6 +77,7 @@ export class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
+            id="twitter"
             placeholder="Twitter Profile URL"
             name="twitter"
             icon="fab fa-twitter"
@@ -86,6 +87,7 @@ export class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="facebook"
             placeholder="Facebook Page URL"
             name="facebook"
             icon="fab fa-facebook"
@@ -95,6 +97,7 @@ export class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="linkedin"
             placeholder="Linkedin Profile URL"
             name="linkedin"
             icon="fab fa-linkedin"
@@ -104,6 +107,7 @@ export class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="youtube"
             placeholder="YouTube Channel URL"
             name="youtube"
             icon="fab fa-youtube"
@@ -113,6 +117,7 @@ export class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="instagram"
             placeholder="Instagram Page URL"
             name="instagram"
             icon="fab fa-instagram"

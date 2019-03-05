@@ -2,20 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { acceptRequest, declineRequest } from "../../actions/profileActions";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import { Request } from "../common/styles/Request";
 import { Link } from "react-router-dom";
-
-const Request = styled.div`
-  width: 300px;
-  height: 150px;
-  background-color: whitesmoke;
-  border-radius: 1rem;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  border: lightgrey solid 1px;
-`;
 
 export class RequestItem extends Component {
   onAccept(id) {
@@ -26,7 +14,7 @@ export class RequestItem extends Component {
     this.props.declineRequest(id);
   }
   render() {
-    const { request, profile, profiles } = this.props;
+    const { request, profiles } = this.props;
     const requestProfile = profiles.filter(
       profile => profile.user._id === request
     );
@@ -40,13 +28,13 @@ export class RequestItem extends Component {
         </div>
         <div className="text-center mt-3">
           <button
-            onClick={this.onAccept.bind(this, request._id)}
+            onClick={this.onAccept.bind(this, request)}
             className="btn btn-outline-success"
           >
             Accept
           </button>
           <button
-            onClick={this.onDecline.bind(this, request._id)}
+            onClick={this.onDecline.bind(this, request)}
             className="btn btn-outline-danger ml-2"
           >
             Decline

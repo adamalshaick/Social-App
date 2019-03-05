@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
+          {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/profile/:handle" component={Profile} />

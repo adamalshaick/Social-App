@@ -29,9 +29,10 @@ exports[`render component renders component 1`] = `
             Log in to your account
           </h3>
           <form
+            noValidate={true}
             onSubmit={[Function]}
           >
-            <TextFieldGroup
+            <InputGroup
               id="email"
               name="email"
               onChange={[Function]}
@@ -39,7 +40,7 @@ exports[`render component renders component 1`] = `
               type="email"
               value="test@gmail.com"
             />
-            <TextFieldGroup
+            <InputGroup
               id="password"
               name="password"
               onChange={[Function]}

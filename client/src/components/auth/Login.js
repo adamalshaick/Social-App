@@ -61,7 +61,7 @@ export class Login extends Component {
             >
               <div className="card-body p-5">
                 <h3 className="mb-5">Log in to your account</h3>
-                <form onSubmit={this.onSubmit}>
+                <form noValidate onSubmit={this.onSubmit}>
                   <InputGroup
                     id="#email"
                     placeholder="Email Adress"

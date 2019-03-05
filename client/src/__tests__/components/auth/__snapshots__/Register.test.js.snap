@@ -32,7 +32,7 @@ exports[`render component renders component 1`] = `
             noValidate={true}
             onSubmit={[Function]}
           >
-            <TextFieldGroup
+            <InputGroup
               id="name"
               name="name"
               onChange={[Function]}
@@ -40,7 +40,7 @@ exports[`render component renders component 1`] = `
               type="text"
               value="testName"
             />
-            <TextFieldGroup
+            <InputGroup
               id="email"
               name="email"
               onChange={[Function]}
@@ -48,7 +48,7 @@ exports[`render component renders component 1`] = `
               type="email"
               value="test@gmail.com"
             />
-            <TextFieldGroup
+            <InputGroup
               id="password"
               name="password"
               onChange={[Function]}
@@ -56,7 +56,7 @@ exports[`render component renders component 1`] = `
               type="password"
               value="passwordTest"
             />
-            <TextFieldGroup
+            <InputGroup
               id="password2"
               name="password2"
               onChange={[Function]}

@@ -79,7 +79,7 @@ export class Dashboard extends Component {
         );
       } else {
         // User is logged in but has no profile
-        return <Redirect to="/create-profile" />;
+        this.props.history.push("/create-profile");
       }
     }
     return (

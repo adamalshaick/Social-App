@@ -33,7 +33,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth } = this.props;
+    const { post, auth, profile } = this.props;
 
     return (
       <div className="row">
@@ -42,11 +42,11 @@ class PostItem extends Component {
             <img
               style={{ width: "40px" }}
               className="rounded-circle  ml-4"
-              src={`../uploads/post_image/placeholder.png`}
+              src={`../uploads/post_image/${post.avatar}`}
               alt=""
             />
           </Link>
-          <div className="text-center mt-2 ml-2 ">{post.name}</div>
+          <div className="mt-1 ml-2">{post.name}</div>
         </div>
         <div className="col-12">
           <div style={{ fontSize: "0.9rem" }} className="float-left ml-2">
@@ -102,17 +102,8 @@ class PostItem extends Component {
           <div className="mt-2 ml-lg-4 row">
             {this.state.displayComments ? (
               <div className="col-12">
-                <CommentFeed
-                  className="col-12"
-                  style={{ width: "100%" }}
-                  postId={post._id}
-                  comments={post.comments}
-                />
-                <CommentForm
-                  className="col-12"
-                  style={{ width: "100%" }}
-                  postId={post._id}
-                />
+                <CommentFeed postId={post._id} comments={post.comments} />
+                <CommentForm postId={post._id} profile={profile} />
               </div>
             ) : null}
           </div>

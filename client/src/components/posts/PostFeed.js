@@ -4,8 +4,10 @@ import PostItem from "./PostItem";
 
 class PostFeed extends Component {
   render() {
-    const { posts } = this.props;
-    const postFeed = posts.map(post => <PostItem key={post._id} post={post} />);
+    const { posts, profiles, profile } = this.props;
+    const postFeed = posts.map(post => (
+      <PostItem key={post._id} post={post} profile={profile} />
+    ));
     return <div className="col-12">{postFeed}</div>;
   }
 }

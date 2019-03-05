@@ -34,11 +34,27 @@ class Landing extends Component {
             />
             <div className="col-3" />
           </div>
-          <div className="row">
+          <div className="row text-center">
+            <div
+              style={{
+                position: "absolute",
+                top: "40%",
+                fontSize: "1.4rem",
+                fontFamily: "'Montserrat', sans-serif",
+                transform: "translateY(33%)",
+                left: "250px"
+              }}
+            >
+              <p>Full-Stack Social Application</p>
+              <Link to="/register" className="btn btn-outline-dark">
+                Get Started
+              </Link>
+            </div>
+
             <img
               className="landing-image"
               style={{
-                width: "550px",
+                width: "28.645%",
                 height: "367px",
                 position: "absolute",
                 left: "44%",

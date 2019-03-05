@@ -2,6 +2,12 @@
 
 body {
   font-family: "Source Sans Pro", sans-serif;
+  padding-bottom: 200px;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }
 
 .entry {

@@ -27,7 +27,7 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar
+      avatar: this.props.profile.profileImage
     };
 
     this.props.addPost(newPost);
@@ -67,7 +67,8 @@ class PostForm extends Component {
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

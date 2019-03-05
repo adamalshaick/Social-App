@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ProfileItem from "../profiles/ProfileItem";
-import { connect } from "react-redux";
-import { getProfiles } from "../../actions/profileActions";
 
 class FriendsFeed extends Component {
   render() {
@@ -10,20 +8,12 @@ class FriendsFeed extends Component {
     let friendItems;
 
     if (profile.friends && profile.friends.length) {
-      friendItems = profiles.reduce((friendItems, profileItem) => {
-        if (
-          profileItem.user._id ===
-          profile.friends.find(friend => {
-            return friend;
-          })
-        ) {
-          friendItems.push(
-            <ProfileItem key={profileItem._id} profile={profileItem} />
-          );
-        }
-        console.log(friendItems);
-        return friendItems;
-      }, []);
+      const friends = profiles.filter(friend =>
+        profile.friends.includes(friend.user._id)
+      );
+      friendItems = friends.map(friend => (
+        <ProfileItem key={friend._id} profile={friend} />
+      ));
     } else {
       friendItems = (
         <div className="text-center">
@@ -37,15 +27,8 @@ class FriendsFeed extends Component {
       );
     }
 
-    return <div>{friendItems}</div>;
+    return <div className="row">{friendItems}</div>;
   }
 }
 
-const mapStateToProps = state => ({
-  profiles: state.profiles
-});
-
-export default connect(
-  null,
-  { getProfiles }
-)(FriendsFeed);
+export default FriendsFeed;

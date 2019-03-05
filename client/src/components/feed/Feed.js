@@ -4,14 +4,9 @@ import { connect } from "react-redux";
 import { getProfiles, getCurrentProfile } from "../../actions/profileActions";
 import Loading from "../common/Loading";
 import Navbar from "../layout/Navbar";
-import styled from "styled-components";
+import { Header } from "../common/styles/Header";
 import Posts from "../posts/Posts";
 import { Redirect } from "react-router-dom";
-
-const Header = styled.header`
-  font-size: 1.5rem;
-  font-weight: 400;
-`;
 
 class Feed extends Component {
   componentDidMount() {
@@ -48,7 +43,7 @@ class Feed extends Component {
               >
                 <Header className="text-center">Posts</Header>
                 <hr />
-                <Posts />
+                <Posts profile={profile} />
               </div>
             </div>
           </div>
