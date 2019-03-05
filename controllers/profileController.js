@@ -18,11 +18,7 @@ const uploadService = require("../services/uploadService");
 module.exports = {
   createProfile: (req, res) => {
     uploadService.upload(req, res, error => {
-      const { errors, isValid } = validateProfileInput(
-        req.body,
-        req.file,
-        error
-      );
+      const { errors, isValid } = validateProfileInput(req.body, error);
 
       // Check Validation
       if (!isValid) {
@@ -59,7 +55,7 @@ module.exports = {
           // Check if handle exists
           Profile.findOne({ handle: createFields.handle }).then(profile => {
             if (profile) {
-              errors.handle = "That handle already exists";
+              errors.handle = "That username already exists";
               res.status(400).json(errors);
             }
 
@@ -114,6 +110,7 @@ module.exports = {
     const errors = {};
     Profile.find()
       .populate("user", ["name", "avatar"])
+      .sort({ date: -1 })
       .then(profiles => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";

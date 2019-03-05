@@ -50,7 +50,8 @@ class ProfileContent extends Component {
         <div className="text-center mt-5">
           <img
             style={{ width: "250px", height: "250px" }}
-            src={`../uploads/post_image/${profile.profileImage}`}
+            // src={`../uploads/post_image/${profile.profileImage}`}
+            src="../uploads/post_image/placeholder.png"
             alt=""
           />
         </div>

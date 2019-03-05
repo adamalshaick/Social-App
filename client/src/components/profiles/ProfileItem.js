@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import isEmpty from "../../validation/is-empty";
 import { sendFriendRequest } from "../../actions/profileActions";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -37,7 +36,8 @@ class ProfileItem extends Component {
 
             <img
               style={{ height: "200px", width: "200px" }}
-              src={`../uploads/post_image/${profile.profileImage}`}
+              // src={`../uploads/post_image/${profile.profileImage}`}
+              src="../uploads/post_image/placeholder.png"
             />
           </Link>
         </Card>
