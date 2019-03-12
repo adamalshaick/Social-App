@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-// import TextFieldGroup from "../common/TextFieldGroup";
 import Navbar from "../layout/Navbar";
 import InputGroup from "../common/InputGroup";
+import handleInputErrors from "../common/hoc/handleInputErrors";
+import redirectAuthenticated from "../common/hoc/redirectAuthenticated";
 
 export class Register extends Component {
   constructor() {
@@ -18,18 +18,6 @@ export class Register extends Component {
       password2: "",
       errors: {}
     };
-  }
-
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
   }
 
   onChange = e => {
@@ -50,7 +38,7 @@ export class Register extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
     return (
       <>
         <Navbar />
@@ -127,12 +115,7 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { registerUser }
-)(withRouter(Register));
+)(handleInputErrors(redirectAuthenticated(Register)));

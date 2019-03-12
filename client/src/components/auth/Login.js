@@ -5,6 +5,8 @@ import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 import InputGroup from "../common/InputGroup";
 import Navbar from "../layout/Navbar";
+import handleInputErrors from "../common/hoc/handleInputErrors";
+import redirectAuthenticated from "../common/hoc/redirectAuthenticated";
 
 export class Login extends Component {
   constructor() {
@@ -16,25 +18,10 @@ export class Login extends Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
   onSubmit = e => {
     e.preventDefault();
     const userData = {
@@ -44,7 +31,7 @@ export class Login extends Component {
     this.props.loginUser(userData);
   };
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
 
     return (
       <>
@@ -109,12 +96,7 @@ Login.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { loginUser }
-)(Login);
+)(handleInputErrors(redirectAuthenticated(Login)));
