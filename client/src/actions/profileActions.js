@@ -7,7 +7,7 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER,
   GET_PROFILES,
-  ADD_FRIEND
+  GET_CURRENT_PROFILE
 } from "./types";
 
 // Get profile by handle
@@ -36,13 +36,13 @@ export const getCurrentProfile = () => dispatch => {
     .get("/api/profile")
     .then(res =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_CURRENT_PROFILE,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_CURRENT_PROFILE,
         payload: {}
       })
     );
