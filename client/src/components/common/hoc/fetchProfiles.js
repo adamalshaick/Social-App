@@ -1,57 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Loading from "../Loading";
-import {
-  getCurrentProfile,
-  getProfiles
-} from "../../../actions/profileActions";
-import Navbar from "../../layout/Navbar";
-import { Redirect } from "react-router-dom";
+import { getProfiles } from "../../../actions/profileActions";
 import PropTypes from "prop-types";
+import SecondaryLoading from "../SecondaryLoading";
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
     componentDidMount() {
       this.props.getProfiles();
-      this.props.getCurrentProfile();
     }
     render() {
-      const { profiles, currentProfile, loading } = this.props.profile;
+      const { profiles } = this.props;
       // Wait for profiles data
-      if (!profiles || !currentProfile || loading) {
-        return (
-          <>
-            <Navbar />
-            <Loading />
-          </>
-        );
+      if (!profiles) {
+        return <SecondaryLoading />;
+      } else {
+        return <ChildComponent {...this.props} />;
       }
-      // Check if logged in user has profile data
-      else if (Object.keys(currentProfile).length > 0) {
-        return (
-          <>
-            <Navbar />
-            <ChildComponent {...this.props} />
-          </>
-        );
-      } else return <Redirect to="/create-profile" />;
     }
   }
 
   ChildComponent.propTypes = {
-    getCurrentProfile: PropTypes.func.isRequired,
     getProfiles: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    profiles: PropTypes.array.isRequired
   };
 
   const mapStateToProps = state => ({
-    profile: state.profile,
-    auth: state.auth
+    profiles: state.profile.profiles
   });
 
   return connect(
     mapStateToProps,
-    { getCurrentProfile, getProfiles }
+    { getProfiles }
   )(ComposedComponent);
 };

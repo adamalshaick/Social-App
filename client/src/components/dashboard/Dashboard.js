@@ -4,17 +4,15 @@ import ProfileContent from "../profile/ProfileContent";
 import FriendsFeed from "../friends/FriendsFeed";
 import FriendRequests from "../friendRequests/FriendRequests";
 import { Header } from "../common/styles/Header";
-import fetchProfiles from "../common/hoc/fetchProfiles";
+import fetchProfile from "../common/hoc/fetchProfile";
 
 const Dashboard = ({ auth, profile }) => {
   return (
     <article className="container entry">
+      {/* return friend requests if there is any */}
       {profile.currentProfile.friendRequests &&
       profile.currentProfile.friendRequests.length ? (
-        <FriendRequests
-          profile={profile.profile}
-          profiles={profile.currentProfile}
-        />
+        <FriendRequests profile={profile.currentProfile} />
       ) : null}
       <div className="row mt-5">
         <section
@@ -28,10 +26,7 @@ const Dashboard = ({ auth, profile }) => {
         <section className="col-md-6">
           <Header className="text-center">Your Friends</Header>
           <hr />
-          <FriendsFeed
-            profile={profile.currentProfile}
-            profiles={profile.profiles}
-          />
+          <FriendsFeed profile={profile.currentProfile} />
         </section>
       </div>
     </article>
@@ -43,4 +38,4 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
-export default fetchProfiles(Dashboard);
+export default fetchProfile(Dashboard);
