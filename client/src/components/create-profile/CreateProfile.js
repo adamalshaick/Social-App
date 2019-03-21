@@ -80,7 +80,7 @@ export class CreateProfile extends Component {
     return (
       <>
         <Navbar />
-        <section className="entry container mt-5">
+        <section className="entry container mt-md-5">
           <div className="row">
             <ShadowCard className="col-md-8 m-auto">
               <Header className="text-center mb-4">Create Your Profile</Header>
