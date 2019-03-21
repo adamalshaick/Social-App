@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-// import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-import InputGroup from "../common/InputGroup";
-import { createProfile } from "../../actions/profileActions";
-import UploadFileGroup from "../common/UploadFileGroup";
+import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import Navbar from "../layout/Navbar";
+import { ShadowCard } from "../common/styles/ShadowCard";
+import handleInputErrors from "../common/hoc/handleInputErrors";
+import SocialMedia from "./SocialMedia";
+import ProfileInfo from "./ProfileInfo";
+import { Header } from "../common/styles/Header";
 
 export class CreateProfile extends Component {
   constructor(props) {
@@ -22,14 +22,21 @@ export class CreateProfile extends Component {
       linkedin: "",
       youtube: "",
       instagram: "",
-      selectedFile: null,
-      errors: {}
+      selectedFile: null
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
+
+  componentDidUpdate() {
+    // Wait for profile data
+    if (this.props.profile.currentProfile != null) {
+      // Redirect after profile is created
+      if (Object.keys(this.props.profile.currentProfile).length > 0) {
+        this.props.history.push("/dashboard");
+      }
     }
   }
 
@@ -61,7 +68,7 @@ export class CreateProfile extends Component {
     profileData.append("youtube", this.state.youtube);
     profileData.append("instagram", this.state.instagram);
 
-    this.props.createProfile(profileData, this.props.history);
+    this.props.createProfile(profileData);
   };
 
   onChange = e => {
@@ -69,127 +76,24 @@ export class CreateProfile extends Component {
   };
 
   render() {
-    const { errors, displaySocialInputs } = this.state;
-
-    let socialInputs;
-
-    if (displaySocialInputs) {
-      socialInputs = (
-        <div>
-          <InputGroup
-            id="twitter"
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
-          />
-
-          <InputGroup
-            id="facebook"
-            placeholder="Facebook Page URL"
-            name="facebook"
-            icon="fab fa-facebook"
-            value={this.state.facebook}
-            onChange={this.onChange}
-            error={errors.facebook}
-          />
-
-          <InputGroup
-            id="linkedin"
-            placeholder="Linkedin Profile URL"
-            name="linkedin"
-            icon="fab fa-linkedin"
-            value={this.state.linkedin}
-            onChange={this.onChange}
-            error={errors.linkedin}
-          />
-
-          <InputGroup
-            id="youtube"
-            placeholder="YouTube Channel URL"
-            name="youtube"
-            icon="fab fa-youtube"
-            value={this.state.youtube}
-            onChange={this.onChange}
-            error={errors.youtube}
-          />
-
-          <InputGroup
-            id="instagram"
-            placeholder="Instagram Page URL"
-            name="instagram"
-            icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
-          />
-        </div>
-      );
-    }
-
+    const { errors } = this.props;
     return (
       <>
         <Navbar />
-        <div className="entry container mt-5">
+        <section className="entry container mt-5">
           <div className="row">
-            <div
-              style={{
-                boxShadow:
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                padding: "2rem"
-              }}
-              className="col-md-8 m-auto"
-            >
-              <h1 style={{ fontSize: "1.7rem" }} className="text-center mb-4">
-                Create Your Profile
-              </h1>
-
+            <ShadowCard className="col-md-8 m-auto">
+              <Header className="text-center mb-4">Create Your Profile</Header>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <div className="row">
-                  <div className="col-md-6 mb-2">
-                    <UploadFileGroup
-                      error={errors.file}
-                      icon="fas fa-file-upload fa-8x"
-                      type="file"
-                      name="file"
-                      onChange={this.fileSelectedHandler}
-                      info="Profile Image"
-                    />
-                  </div>
-                  <div className="col-md-6 mt-5">
-                    <InputGroup
-                      id="handle"
-                      placeholder="* Username"
-                      name="handle"
-                      value={this.state.handle}
-                      onChange={this.onChange}
-                      error={errors.handle}
-                      info="Your username"
-                    />
-                    <InputGroup
-                      id="location"
-                      placeholder="Location"
-                      name="location"
-                      value={this.state.location}
-                      onChange={this.onChange}
-                      error={errors.location}
-                      info="Your Location"
-                    />
-                  </div>
-                </div>
-                <TextAreaFieldGroup
-                  id="bio"
-                  placeholder="Short Bio"
-                  name="bio"
-                  value={this.state.bio}
+                <ProfileInfo
+                  errors={errors}
                   onChange={this.onChange}
-                  error={errors.bio}
-                  info="Your description"
+                  handle={this.state.handle}
+                  location={this.state.location}
+                  bio={this.state.bio}
+                  fileSelectedHandler={this.fileSelectedHandler}
                 />
-
                 <div className="mb-3">
                   <button
                     type="button"
@@ -204,32 +108,44 @@ export class CreateProfile extends Component {
                   </button>
                   <small className="text-muted d-block">(Optional)</small>
                 </div>
-                {socialInputs}
+                {this.state.displaySocialInputs ? (
+                  <SocialMedia
+                    twitter={this.state.twitter}
+                    facebook={this.state.facebook}
+                    linkedin={this.state.linkedin}
+                    youtube={this.state.youtube}
+                    instagram={this.state.instagram}
+                    onChange={this.onChange}
+                    errors={errors}
+                  />
+                ) : null}
+
                 <input
                   type="submit"
                   value="Submit"
                   className="btn btn-outline-primary float-right mt-4"
                 />
               </form>
-            </div>
+            </ShadowCard>
           </div>
-        </div>
+        </section>
       </>
     );
   }
 }
 
 CreateProfile.propTypes = {
+  errors: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
-  errors: state.errors
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { createProfile }
-)(withRouter(CreateProfile));
+  { createProfile, getCurrentProfile }
+)(handleInputErrors(CreateProfile));

@@ -9,16 +9,14 @@ import fetchProfile from "../common/hoc/fetchProfile";
 const Dashboard = ({ auth, profile }) => {
   return (
     <article className="container entry">
-      {/* return friend requests if there is any */}
+      {/* return friend requests if there are any */}
       {profile.currentProfile.friendRequests &&
       profile.currentProfile.friendRequests.length ? (
         <FriendRequests profile={profile.currentProfile} />
       ) : null}
       <div className="row mt-5">
         <section
-          style={{
-            borderRight: "whitesmoke solid 2px"
-          }}
+          style={{ borderRight: "whitesmoke solid 2px" }}
           className="col-md-6"
         >
           <ProfileContent profile={profile.currentProfile} user={auth.user} />
@@ -26,7 +24,7 @@ const Dashboard = ({ auth, profile }) => {
         <section className="col-md-6">
           <Header className="text-center">Your Friends</Header>
           <hr />
-          <FriendsFeed profile={profile.currentProfile} />
+          <FriendsFeed currentProfile={profile.currentProfile} />
         </section>
       </div>
     </article>

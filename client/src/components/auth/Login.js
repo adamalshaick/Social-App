@@ -7,14 +7,14 @@ import InputGroup from "../common/InputGroup";
 import Navbar from "../layout/Navbar";
 import handleInputErrors from "../common/hoc/handleInputErrors";
 import redirectAuthenticated from "../common/hoc/redirectAuthenticated";
+import { ShadowCard } from "../common/styles/ShadowCard";
 
 export class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      password: "",
-      errors: {}
+      password: ""
     };
   }
 
@@ -39,13 +39,7 @@ export class Login extends Component {
         <div className="container">
           <div className="row mt-5 entry">
             <div className="col-md-2 col-lg-3" />
-            <div
-              style={{
-                boxShadow:
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-              }}
-              className="col-md-8 col-lg-6 card mt-5 text-center p-0 "
-            >
+            <ShadowCard className="col-md-8 col-lg-6 card mt-5 text-center p-0 ">
               <div className="card-body p-5">
                 <h3 className="mb-5">Log in to your account</h3>
                 <form noValidate onSubmit={this.onSubmit}>
@@ -59,7 +53,6 @@ export class Login extends Component {
                     error={errors.email}
                     id="email"
                   />
-
                   <InputGroup
                     id="#password"
                     placeholder="Password"
@@ -70,10 +63,9 @@ export class Login extends Component {
                     error={errors.password}
                     id="password"
                   />
-
                   <button
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-outline-primary btn-block mt-4"
                   >
                     Log In
                   </button>
@@ -82,7 +74,7 @@ export class Login extends Component {
               <div className="text-muted card-footer mt-3">
                 Don't have an account yet? <Link to="/register">Sign Up</Link>
               </div>
-            </div>
+            </ShadowCard>
           </div>
         </div>
       </>
@@ -99,4 +91,4 @@ Login.propTypes = {
 export default connect(
   null,
   { loginUser }
-)(handleInputErrors(redirectAuthenticated(Login)));
+)(redirectAuthenticated(handleInputErrors(Login)));

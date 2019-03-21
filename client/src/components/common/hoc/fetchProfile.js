@@ -14,7 +14,7 @@ export default ChildComponent => {
 
     render() {
       const { currentProfile } = this.props.profile;
-      // Wait for profiles data
+      // Wait for profile data
       if (!currentProfile) {
         return (
           <>
@@ -24,14 +24,16 @@ export default ChildComponent => {
         );
       }
       // Check if logged in user has profile data
-      else if (Object.keys(currentProfile).length > 0) {
-        return (
-          <>
-            <Navbar />
-            <ChildComponent {...this.props} />
-          </>
-        );
-      } else return <Redirect to="/create-profile" />;
+      else {
+        if (Object.keys(currentProfile).length > 0) {
+          return (
+            <>
+              <Navbar />
+              <ChildComponent {...this.props} />
+            </>
+          );
+        } else return <Redirect to="/create-profile" />;
+      }
     }
   }
 

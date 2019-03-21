@@ -1,46 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import PostForm from "./PostForm.js";
-import { getPosts } from "../../actions/postActions";
 import PostFeed from "./PostFeed";
-import Loading from "../common/Loading.js";
+import fetchPosts from "../common/hoc/fetchPosts.js";
 
-class Posts extends Component {
-  componentDidMount() {
-    this.props.getPosts();
-  }
-
-  render() {
-    const { posts, loading } = this.props.post;
-    const { profile } = this.props;
-    let postContent;
-
-    if (posts === null || loading) {
-      postContent = <Loading />;
-    } else {
-      postContent = <PostFeed posts={posts} profile={profile} />;
-    }
-
-    return (
-      <div>
-        <PostForm profile={profile} />
-        <div className="mt-5">{postContent}</div>
+const Posts = ({ post, currentProfile }) => {
+  return (
+    <div className="entry">
+      <PostForm currentProfile={currentProfile} />
+      <div className="mt-5">
+        <PostFeed posts={post.posts} currentProfile={currentProfile} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Posts.propTypes = {
-  getPosts: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  post: state.post
-});
-
-export default connect(
-  mapStateToProps,
-  { getPosts }
-)(Posts);
+export default fetchPosts(Posts);

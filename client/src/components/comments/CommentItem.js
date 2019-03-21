@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteComment } from "../../actions/postActions";
-import Link from "react-router-dom/Link";
 
 class CommentItem extends Component {
   onDeleteClick(postId, commentId) {
@@ -14,14 +13,13 @@ class CommentItem extends Component {
     return (
       <div className=" mb-3">
         <div className="row mt-3">
-          <Link to="">
-            <img
-              style={{ width: "40px" }}
-              className="rounded-circle  ml-4"
-              src="../uploads/post_image/placeholder.png"
-              alt=""
-            />
-          </Link>
+          <img
+            style={{ width: "40px", height: "40px" }}
+            className="rounded-circle  ml-4"
+            src="../uploads/post_image/placeholder.png"
+            alt=""
+          />
+
           <div className="text-center mt-2 ml-2">{comment.name}</div>
 
           <div className="col-12">
@@ -29,15 +27,18 @@ class CommentItem extends Component {
               {comment.text}
             </div>
           </div>
-
           {comment.user === auth.user.id ? (
-            <button
-              onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-              type="button"
-              className="btn btn-outline-danger btn-sm mr-1"
-            >
-              Delete Comment
-            </button>
+            <div className="mb-4 mt-1" style={{ width: "100%" }}>
+              <div style={{ position: "absolute", right: "10px" }}>
+                <button
+                  onClick={this.onDeleteClick.bind(this, postId, comment._id)}
+                  type="button"
+                  className="btn btn-outline-danger btn-sm mr-1"
+                >
+                  Delete Comment
+                </button>
+              </div>
+            </div>
           ) : null}
         </div>
       </div>

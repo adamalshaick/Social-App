@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { clearErrors } from "../../../actions/errorActions";
+import PropTypes from "prop-types";
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
@@ -14,14 +16,26 @@ export default ChildComponent => {
       }
     }
 
+    componentWillUnmount() {
+      this.props.clearErrors();
+    }
+
     render() {
       return <ChildComponent {...this.props} />;
     }
   }
 
+  ChildComponent.propTypes = {
+    errors: PropTypes.object,
+    clearErrors: PropTypes.func.isRequired
+  };
+
   const mapStateToProps = state => ({
     errors: state.errors
   });
 
-  return connect(mapStateToProps)(ComposedComponent);
+  return connect(
+    mapStateToProps,
+    { clearErrors }
+  )(ComposedComponent);
 };

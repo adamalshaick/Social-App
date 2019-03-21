@@ -1,35 +1,11 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteAccount } from "../../actions/profileActions";
-
-const Header = styled.header`
-  font-size: 1.5rem;
-  font-weight: 400;
-`;
-
-const Button = styled.a`
-  color: white;
-  &:hover {
-    color: white;
-  }
-  width: 120px;
-  background-color: ${props =>
-    props.fb
-      ? "#3B5998"
-      : props.inst
-      ? "#49769C"
-      : props.yt
-      ? "#FF0000"
-      : props.twit
-      ? "#55ACEE"
-      : props.linkd
-      ? "#1F88BE"
-      : "white"};
-`;
+import { Header } from "../common/styles/Header";
+import { Button } from "../common/styles/Button";
 
 class ProfileContent extends Component {
   onDeleteClick() {
@@ -50,8 +26,7 @@ class ProfileContent extends Component {
         <div className="text-center mt-5">
           <img
             style={{ width: "250px", height: "250px" }}
-            // src={`../uploads/post_image/${profile.profileImage}`}
-            src="../uploads/post_image/placeholder.png"
+            src={profile.profileImage}
             alt=""
           />
         </div>
@@ -60,17 +35,20 @@ class ProfileContent extends Component {
         </div>
         <div className="text-center mt-2">
           {isEmpty(profile.location) ? (
-            <i>No location provided</i>
+            <p>
+              <i>No location provided</i>
+            </p>
           ) : (
             <strong>{profile.location}</strong>
           )}
+          {isEmpty(profile.bio) ? (
+            <p>
+              <i>No description provided</i>
+            </p>
+          ) : (
+            <div className="text-center pr-5 pl-5 mt-2 mb-5">{profile.bio}</div>
+          )}
         </div>
-        {isEmpty(profile.bio) ? (
-          <i>No description provided</i>
-        ) : (
-          <div className="text-center pr-5 pl-5 mt-2 mb-5">{profile.bio}</div>
-        )}
-
         <div className="text-center">
           <div>
             {isEmpty(profile.social && profile.social.facebook) ? null : (
@@ -128,7 +106,7 @@ class ProfileContent extends Component {
           <>
             <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-outline-danger float-right mt-4"
+              className="btn btn-outline-danger float-right mt-4 mb-5 mb-md-0"
             >
               Delete Account
             </button>
@@ -147,7 +125,7 @@ class ProfileContent extends Component {
 ProfileContent.propTypes = {
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  currentProfile: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired
 };
 

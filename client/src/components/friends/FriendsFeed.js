@@ -3,21 +3,25 @@ import { Link } from "react-router-dom";
 import ProfileItem from "../profiles/ProfileItem";
 import fetchProfiles from "../common/hoc/fetchProfiles";
 
-const FriendsFeed = ({ profile, profiles }) => {
+const FriendsFeed = ({ currentProfile, profiles }) => {
   let friendItems;
   // Check to see if user has friends
-  if (profile.friends && profile.friends.length) {
+  if (currentProfile.friends && currentProfile.friends.length) {
     // Get all friends out of profiles array
     const friends = profiles.filter(friend =>
-      profile.friends.includes(friend.user._id)
+      currentProfile.friends.includes(friend.user._id)
     );
     // Create new array with friends content
     friendItems = friends.map(friend => (
-      <ProfileItem key={friend._id} profile={friend} />
+      <ProfileItem
+        key={friend._id}
+        profile={friend}
+        currentProfile={currentProfile}
+      />
     ));
   } else {
     friendItems = (
-      <div className="text-center">
+      <div className="text-center col-12">
         <p>
           <i>You didn't add any friend yet</i>
         </p>

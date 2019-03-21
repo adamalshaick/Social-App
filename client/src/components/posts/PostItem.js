@@ -9,7 +9,7 @@ import CommentFeed from "../comments/CommentFeed";
 class PostItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { displayComments: false };
+    this.state = { displayCommentForm: false };
   }
   onDeleteClick(id) {
     this.props.deletePost(id);
@@ -23,17 +23,23 @@ class PostItem extends Component {
     this.props.removeLike(id);
   }
 
-  findUserLike(likes) {
-    const { auth } = this.props;
-    if (likes.filter(like => like.user === auth.user.id).length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // findUserLike(likes) {
+  //   // return likes.filter(like => like.user === this.props.currentProfile.user.id)
+  //   //   .length > 0
+  //   //   ? true
+  //   //   : false;
+  //   if (
+  //     likes.filter(like => like.user === this.props.currentProfile.user.id)
+  //       .length > 0
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   render() {
-    const { post, auth, profile } = this.props;
+    const { post, currentProfile } = this.props;
 
     return (
       <div className="row">
@@ -61,15 +67,15 @@ class PostItem extends Component {
                 type="button"
                 onClick={() => {
                   this.setState(prevState => ({
-                    displayComments: !prevState.displayComments
+                    displayCommentForm: !prevState.displayCommentForm
                   }));
                 }}
                 className="btn btn-outline-primary btn-sm float-right"
               >
-                Comments
+                Add a comment
               </button>
 
-              {post.user === auth.user.id ? (
+              {post.user === currentProfile.user._id ? (
                 <button
                   onClick={this.onDeleteClick.bind(this, post._id)}
                   type="button"
@@ -79,7 +85,9 @@ class PostItem extends Component {
                 </button>
               ) : null}
 
-              {post.likes.find(like => like.user === auth.user.id) ? (
+              {post.likes.find(
+                like => like.user === currentProfile.user._id
+              ) ? (
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
@@ -100,22 +108,21 @@ class PostItem extends Component {
             </div>
           </div>
           <div className="mt-2 ml-lg-4 row">
-            {this.state.displayComments ? (
-              <div className="col-12">
-                <CommentFeed postId={post._id} comments={post.comments} />
-                <CommentForm postId={post._id} profile={profile} />
-              </div>
-            ) : null}
+            <div className="col-12">
+              <CommentFeed postId={post._id} comments={post.comments} />
+              {this.state.displayCommentForm ? (
+                <CommentForm
+                  postId={post._id}
+                  currentProfile={currentProfile}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-
-PostItem.defaultProps = {
-  showActions: true
-};
 
 PostItem.propTypes = {
   deletePost: PropTypes.func.isRequired,

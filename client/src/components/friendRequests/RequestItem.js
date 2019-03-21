@@ -51,11 +51,7 @@ RequestItem.propTypes = {
   declineRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { acceptRequest, declineRequest }
 )(RequestItem);

@@ -6,17 +6,22 @@ import {
   GET_POSTS,
   GET_POST,
   DELETE_POST,
-  POST_LOADING
+  POST_LOADING,
+  CLEAR_ERRORS
 } from "./types";
 
 // Add Post
 export const addPost = postData => dispatch => {
   axios
     .post("/api/posts", postData)
-    .then(res =>
+    .then(
+      res =>
+        dispatch({
+          type: ADD_POST,
+          payload: res.data
+        }),
       dispatch({
-        type: ADD_POST,
-        payload: res.data
+        type: CLEAR_ERRORS
       })
     )
     .catch(err =>

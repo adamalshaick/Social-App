@@ -22,13 +22,19 @@ module.exports = {
     return profileFields;
   },
 
-  updateFields: (user, data) => {
+  updateFields: (user, data, file) => {
     // Get fields
     const profileFields = {};
     profileFields.user = user;
     if (data.handle) profileFields.handle = data.handle;
     if (data.location) profileFields.location = data.location;
     if (data.bio) profileFields.bio = data.bio;
+    if (
+      file &&
+      file !==
+        "https://s3.eu-central-1.amazonaws.com/adam-al-shaick-social-app/placeholder.png"
+    )
+      profileFields.profileImage = file;
 
     // Social
     profileFields.social = {};

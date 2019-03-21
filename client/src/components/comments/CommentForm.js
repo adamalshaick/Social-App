@@ -12,26 +12,17 @@ class CommentForm extends Component {
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
-
   onSubmit = e => {
     e.preventDefault();
-
-    const { user } = this.props.auth;
-    const { postId } = this.props;
+    const { postId, currentProfile } = this.props;
 
     const newComment = {
       text: this.state.text,
-      name: user.name,
-      avatar: this.props.profile.profileImage
+      name: currentProfile.user.name,
+      avatar: currentProfile.profileImage
     };
 
     this.props.addComment(postId, newComment);
-    this.setState({ text: "" });
   };
 
   onChange = e => {
@@ -39,7 +30,7 @@ class CommentForm extends Component {
   };
   render() {
     return (
-      <div className="col-12">
+      <div className="col-12 entry">
         <form onSubmit={this.onSubmit}>
           <TextAreaFieldGroup
             className="form-control"
@@ -63,15 +54,11 @@ class CommentForm extends Component {
 
 CommentForm.propTypes = {
   addPost: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  postId: PropTypes.string.isRequired
+  postId: PropTypes.string.isRequired,
+  currentProfile: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { addComment }
 )(CommentForm);

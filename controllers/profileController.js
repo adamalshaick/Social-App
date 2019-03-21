@@ -28,9 +28,10 @@ module.exports = {
 
       let file;
       if (req.file) {
-        file = req.file.filename;
+        file = req.file.location;
       } else {
-        file = "placeholder.png";
+        file =
+          "https://s3.eu-central-1.amazonaws.com/adam-al-shaick-social-app/placeholder.png";
       }
 
       const createFields = profileService.createFields(
@@ -39,7 +40,11 @@ module.exports = {
         file
       );
 
-      const updateFields = profileService.updateFields(req.user.id, req.body);
+      const updateFields = profileService.updateFields(
+        req.user.id,
+        req.body,
+        file
+      );
 
       Profile.findOne({ user: req.user.id }).then(profile => {
         if (profile) {
@@ -51,14 +56,12 @@ module.exports = {
           ).then(profile => res.json(profile));
         } else {
           // Create
-
           // Check if handle exists
-          Profile.findOne({ handle: createFields.handle }).then(profile => {
+          Profile.findOne({ handle: req.body.handle }).then(profile => {
             if (profile) {
               errors.handle = "That username already exists";
               res.status(400).json(errors);
             }
-
             // Save Profile
             new Profile(createFields).save().then(profile => res.json(profile));
           });
@@ -95,7 +98,7 @@ module.exports = {
   getCurrentProfile: (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name", "avatar"])
+      .populate("user", ["name", "id"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
@@ -109,7 +112,8 @@ module.exports = {
   getProfiles: (req, res) => {
     const errors = {};
     Profile.find()
-      .populate("user", ["name", "avatar"])
+      .populate("user", ["id"])
+      .populate("friends")
       .sort({ date: -1 })
       .then(profiles => {
         if (!profiles) {

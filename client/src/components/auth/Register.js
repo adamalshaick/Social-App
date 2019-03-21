@@ -7,6 +7,7 @@ import Navbar from "../layout/Navbar";
 import InputGroup from "../common/InputGroup";
 import handleInputErrors from "../common/hoc/handleInputErrors";
 import redirectAuthenticated from "../common/hoc/redirectAuthenticated";
+import { ShadowCard } from "../common/styles/ShadowCard";
 
 export class Register extends Component {
   constructor() {
@@ -15,8 +16,7 @@ export class Register extends Component {
       name: "",
       email: "",
       password: "",
-      password2: "",
-      errors: {}
+      password2: ""
     };
   }
 
@@ -45,13 +45,7 @@ export class Register extends Component {
         <div className="container">
           <div className="row mt-5 entry">
             <div className="col-md-2 col-lg-3" />
-            <div
-              style={{
-                boxShadow:
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-              }}
-              className="col-md-8 col-lg-6 card mt-5 text-center p-0 "
-            >
+            <ShadowCard className="col-md-8 col-lg-6 card mt-5 text-center p-0 ">
               <div className="card-body p-5">
                 <h3 className="mb-5">Sign up</h3>
                 <form noValidate onSubmit={this.onSubmit}>
@@ -92,7 +86,7 @@ export class Register extends Component {
                   />
                   <button
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-outline-primary btn-block mt-4"
                   >
                     Create Account
                   </button>
@@ -101,7 +95,7 @@ export class Register extends Component {
               <div className="text-muted card-footer mt-3">
                 Already have an account? <Link to="/login">Log in</Link>
               </div>
-            </div>
+            </ShadowCard>
           </div>
         </div>
       </>

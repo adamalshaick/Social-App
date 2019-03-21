@@ -3,49 +3,37 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addPost } from "../../actions/postActions";
+import handleInputErrors from "../common/hoc/handleInputErrors";
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: "",
-      errors: {}
-    };
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
+    this.state = { text: "" };
   }
 
   onSubmit = e => {
     e.preventDefault();
-
-    const { user } = this.props.auth;
-
+    const { currentProfile } = this.props;
     const newPost = {
       text: this.state.text,
-      name: user.name,
-      avatar: this.props.profile.profileImage
+      name: currentProfile.user.name,
+      avatar: currentProfile.profileImage
     };
-
     this.props.addPost(newPost);
-    this.setState({ [e.target.name]: e.target.value });
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
     return (
       <div className="mb-3">
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <TextAreaFieldGroup
               className="form-control form-control-lg"
-              placeholder="Say Something..."
+              placeholder="Add a post"
               name="text"
               value={this.state.text}
               onChange={this.onChange}
@@ -66,17 +54,11 @@ class PostForm extends Component {
 
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  currentProfile: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { addPost }
-)(PostForm);
+)(handleInputErrors(PostForm));

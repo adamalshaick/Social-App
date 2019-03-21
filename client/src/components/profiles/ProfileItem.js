@@ -3,28 +3,23 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { sendFriendRequest } from "../../actions/profileActions";
 import { connect } from "react-redux";
-import styled from "styled-components";
-
-const Card = styled.div`
-  &:hover {
-    filter: brightness(80%);
-  }
-  transition: filter 0.5s;
-`;
+import { ProfileCard } from "../common/styles/ProfileCard";
 
 class ProfileItem extends Component {
-  onRequest(id) {
-    this.props.sendFriendRequest(id);
-  }
-
+  onClick = () => {
+    this.props.sendFriendRequest(this.props.profile.user._id);
+  };
   render() {
-    const { profile, auth } = this.props;
+    const { profile, currentProfile } = this.props;
     return (
-      <div className="col-12 col-xl-6">
-        <Card className="text-center p-1">
+      <div className="col-12 col-xl-6 entry">
+        <ProfileCard className="text-center p-1">
           <Link to={`/profile/${profile.handle}`}>
             <div>
-              {profile.friends.find(friend => friend === auth.user.id) ? (
+              {/* Display friend marker */}
+              {profile.friends.find(
+                friend => friend._id === currentProfile.user._id
+              ) ? (
                 <i
                   style={{ color: "lightgreen" }}
                   className="far fa-check-circle mr-2"
@@ -33,29 +28,33 @@ class ProfileItem extends Component {
 
               {profile.handle}
             </div>
-
             <img
               style={{ height: "200px", width: "200px" }}
               // src={`../uploads/post_image/${profile.profileImage}`}
               src="../uploads/post_image/placeholder.png"
             />
           </Link>
-        </Card>
-        {profile.friends.find(
-          friend => friend === auth.user.id
-        ) ? null : profile.friendRequests.find(
-            request => request === auth.user.id
-          ) ? null : (
-          <div className="text-center">
-            <button
-              className="btn btn-outline-primary btn-sm mt-3"
-              onClick={this.onRequest.bind(this, profile.user._id)}
-            >
-              Send friend request
-              <i className="fas fa-arrow-circle-right ml-2" />
-            </button>
-          </div>
-        )}
+          {profile.friends.find(
+            friend => friend._id === currentProfile.user._id
+          ) ? null : profile.friendRequests.find(
+              request => request === currentProfile.user._id
+            ) ? (
+            <div className="center entry">
+              <i>Request sent</i>
+            </div>
+          ) : (
+            <div className="text-center">
+              <button
+                className="btn btn-outline-primary btn-sm mt-3"
+                onClick={this.onClick}
+              >
+                Send friend request
+                <i className="fas fa-arrow-circle-right ml-2" />
+              </button>
+            </div>
+          )}
+        </ProfileCard>
+        {/* Check if profile is already in current users friend list / if request is already sent */}
       </div>
     );
   }
@@ -63,15 +62,10 @@ class ProfileItem extends Component {
 
 ProfileItem.propTypes = {
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
   sendFriendRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { sendFriendRequest }
 )(ProfileItem);

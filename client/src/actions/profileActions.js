@@ -49,12 +49,11 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 // Create Profile
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = profileData => dispatch => {
   axios
     .post("/api/profile", profileData)
     .then(res => {
       dispatch(getCurrentProfile());
-      history.push("/dashboard");
     })
     .catch(err =>
       dispatch({
