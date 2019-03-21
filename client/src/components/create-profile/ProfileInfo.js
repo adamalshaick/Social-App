@@ -1,7 +1,7 @@
 import React from "react";
-import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import UploadFileGroup from "../common/UploadFileGroup";
+import InputGroup from "../common/InputGroup";
 
 const ProfileInfo = ({
   errors,
@@ -25,7 +25,7 @@ const ProfileInfo = ({
           />
         </div>
         <div className="col-md-6 mt-5">
-          <TextFieldGroup
+          <InputGroup
             id="handle"
             placeholder="* Username"
             name="handle"
@@ -34,7 +34,7 @@ const ProfileInfo = ({
             error={errors.handle}
             info="Your username"
           />
-          <TextFieldGroup
+          <InputGroup
             id="location"
             placeholder="Location"
             name="location"

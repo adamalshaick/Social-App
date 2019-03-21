@@ -11,7 +11,6 @@ const Login = lazy(() => import("./components/auth/Login"));
 const CreateProfile = lazy(() =>
   import("./components/create-profile/CreateProfile")
 );
-const EditProfile = lazy(() => import("./components/edit-profile/EditProfile"));
 const Profile = lazy(() => import("./components/profile/Profile"));
 const Feed = lazy(() => import("./components/feed/Feed"));
 const NotFound = lazy(() => import("./components/not-found/NotFound"));
@@ -39,7 +38,6 @@ const App = () => {
             path="/create-profile"
             component={CreateProfile}
           />
-          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute exact path="/feed" component={Feed} />
           <Route component={NotFound} />
         </Switch>
