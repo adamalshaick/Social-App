@@ -15,11 +15,6 @@ beforeEach(() => {
 });
 
 describe("basic profile actions", () => {
-  it("sets profile loading", () => {
-    const action = profileActions.setProfileLoading();
-    expect(action).toEqual({ type: types.PROFILE_LOADING });
-  });
-
   it("clears current profile", () => {
     const action = profileActions.clearCurrentProfile();
     expect(action).toEqual({ type: types.CLEAR_CURRENT_PROFILE });
@@ -36,7 +31,6 @@ describe("get profile actions", () => {
     profileActions.getProfileByHandle(handle)(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.PROFILE_LOADING },
       {
         payload: { profile: { name: "testprofile" } },
         type: types.GET_PROFILE
@@ -53,7 +47,6 @@ describe("get profile actions", () => {
     profileActions.getProfileByHandle(handle)(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.PROFILE_LOADING },
       { payload: null, type: types.GET_PROFILE }
     ]);
   });
@@ -66,10 +59,9 @@ describe("get profile actions", () => {
     profileActions.getCurrentProfile()(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.PROFILE_LOADING },
       {
         payload: { profile: { name: "testprofile" } },
-        type: types.GET_PROFILE
+        type: types.GET_CURRENT_PROFILE
       }
     ]);
   });
@@ -82,10 +74,9 @@ describe("get profile actions", () => {
     profileActions.getCurrentProfile()(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.PROFILE_LOADING },
       {
         payload: {},
-        type: types.GET_PROFILE
+        type: types.GET_CURRENT_PROFILE
       }
     ]);
   });

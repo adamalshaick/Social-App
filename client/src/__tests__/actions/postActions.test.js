@@ -14,13 +14,6 @@ beforeEach(() => {
   store = mockStore({});
 });
 
-describe("basic post actions", () => {
-  it("sets post loading", () => {
-    const action = postActions.setPostLoading();
-    expect(action).toEqual({ type: types.POST_LOADING });
-  });
-});
-
 describe("getting posts actions", () => {
   it("fetches posts", async () => {
     httpMock.onGet("/api/posts").reply(200, {
@@ -29,7 +22,6 @@ describe("getting posts actions", () => {
     postActions.getPosts()(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.POST_LOADING },
       {
         type: types.GET_POSTS,
         payload: { posts: [{ name: "post #1" }, { name: "post #2" }] }
@@ -44,8 +36,7 @@ describe("getting posts actions", () => {
     postActions.getPosts()(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
-      { type: types.POST_LOADING },
-      { type: types.GET_POSTS, payload: null }
+      { payload: null, type: types.GET_POSTS }
     ]);
   });
 });
@@ -67,6 +58,7 @@ describe("adding posts actions", () => {
     postActions.addPost(postData)(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
+      { type: types.CLEAR_ERRORS },
       { type: types.ADD_POST, payload: { postData } }
     ]);
   });
@@ -79,6 +71,7 @@ describe("adding posts actions", () => {
     postActions.addPost(postData)(store.dispatch);
     await flushAllPromises();
     expect(store.getActions()).toEqual([
+      { type: types.CLEAR_ERRORS },
       { type: types.GET_ERRORS, payload: { errorData } }
     ]);
   });
