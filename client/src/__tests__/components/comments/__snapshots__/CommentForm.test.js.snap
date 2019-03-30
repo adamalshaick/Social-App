@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="col-12 entry"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <TextAreaFieldGroup
+      className="form-control"
+      id="commentInput"
+      name="text"
+      onChange={[Function]}
+      placeholder="Make a comment..."
+      style={
+        Object {
+          "fontSize": "12px",
+          "width": "100%",
+        }
+      }
+      value=""
+    />
+    <div
+      className="float-right"
+    >
+      <button
+        className="btn btn-outline-primary btn-sm"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+`;
