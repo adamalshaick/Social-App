@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <Connect(Navbar) />
+  <section
+    className="entry container mt-md-5"
+  >
+    <div
+      className="row"
+    >
+      <styled.div
+        className="col-md-8 m-auto"
+      >
+        <styled.header
+          className="text-center mb-4"
+        >
+          Create Your Profile
+        </styled.header>
+        <small
+          className="d-block pb-3"
+        >
+          * = required fields
+        </small>
+        <form
+          onSubmit={[Function]}
+        >
+          <ProfileInfo
+            bio=""
+            errors={Object {}}
+            fileSelectedHandler={[Function]}
+            handle=""
+            location=""
+            onChange={[Function]}
+          />
+          <div
+            className="mb-3"
+          >
+            <button
+              className="btn btn-outline-primary"
+              id="toggleSocials"
+              onClick={[Function]}
+              type="button"
+            >
+              Add Social Media Links
+            </button>
+            <small
+              className="text-muted d-block"
+            >
+              (Optional)
+            </small>
+          </div>
+          <input
+            className="btn btn-outline-primary float-right mt-4"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </styled.div>
+    </div>
+  </section>
+</Fragment>
+`;

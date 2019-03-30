@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6 mb-2"
+    >
+      <UploadFileGroup
+        icon="fas fa-file-upload fa-8x"
+        info="Profile Image"
+        name="file"
+        type="file"
+      />
+    </div>
+    <div
+      className="col-md-6 mt-5"
+    >
+      <InputGroup
+        id="handle"
+        info="Your username"
+        name="handle"
+        placeholder="* Username"
+        type="text"
+      />
+      <InputGroup
+        id="location"
+        info="Your Location"
+        name="location"
+        placeholder="Location"
+        type="text"
+      />
+    </div>
+  </div>
+  <TextAreaFieldGroup
+    id="bio"
+    info="Your bio"
+    name="bio"
+    placeholder="Short Bio"
+  />
+</Fragment>
+`;
