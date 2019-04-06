@@ -97,6 +97,7 @@ export class CreateProfile extends Component {
                 <div className="mb-3">
                   <button
                     type="button"
+                    id="toggleSocials"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs

@@ -15,9 +15,11 @@ export class RequestItem extends Component {
   }
   render() {
     const { request, profiles } = this.props;
+    //
     const requestProfile = profiles.filter(
       profile => profile.user._id === request
     );
+    //
     return (
       <Request>
         <div className="text-center mt-4">

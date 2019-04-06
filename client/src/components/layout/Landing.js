@@ -3,6 +3,15 @@ import Link from "react-router-dom/Link";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
+import {
+  Background,
+  Strip,
+  Marker,
+  LandingImage,
+  ImageCover,
+  LandingText,
+  TextCover
+} from "../common/styles/Layout";
 
 class Landing extends Component {
   render() {
@@ -10,88 +19,27 @@ class Landing extends Component {
       <>
         <div className="container-fluid entry">
           <Navbar landing />
-          <div
-            style={{
-              height: "100vh",
-              width: "100vw",
-              position: "absolute",
-              top: "0",
-              zIndex: "-1"
-            }}
-            className="row"
-          >
-            <div
-              style={{ borderRight: "lightgrey solid 1px" }}
-              className="col-3"
-            />
-            <div
-              style={{ borderRight: "lightgrey solid 1px" }}
-              className="col-3"
-            />
-            <div
-              style={{ borderRight: "lightgrey solid 1px" }}
-              className="col-3"
-            />
+          <Background className="row">
+            <Strip className="col-3" />
+            <Strip className="col-3" />
+            <Strip className="col-3" />
             <div className="col-3" />
-          </div>
+          </Background>
           <div className="row text-center">
-            <div
-              style={{
-                position: "absolute",
-                top: "40%",
-                fontSize: "1.4rem",
-                fontFamily: "'Montserrat', sans-serif",
-                transform: "translateY(33%)",
-                left: "250px"
-              }}
-            >
-              <p>Full-Stack Social Application</p>
+            <Marker>
+              <p>
+                Full-Stack React + Node.js <br />
+                Social Application
+              </p>
               <Link to="/register" className="btn btn-outline-dark">
                 Get Started
               </Link>
-            </div>
+            </Marker>
 
-            <img
-              className="landing-image"
-              style={{
-                width: "28.645%",
-                height: "367px",
-                position: "absolute",
-                left: "44%",
-                top: "31%"
-              }}
-              src="./assets/images/rsz_social-landing.jpg"
-            />
-            <div
-              className="image-cover"
-              style={{
-                height: "367px",
-                left: "44%",
-                top: "31%",
-
-                backgroundColor: "#353835"
-              }}
-            />
-            <img
-              className="landing-text"
-              style={{
-                position: "absolute",
-                left: "68%",
-                top: "57%",
-                width: "300px"
-              }}
-              src="./assets/images/SocialText.svg"
-            />
-            <div
-              className="text-cover"
-              style={{
-                position: "absolute",
-                left: "68%",
-                top: "57%",
-                height: "70px",
-                backgroundColor: "whitesmoke"
-              }}
-            />
+            <LandingImage src="./assets/images/rsz_social-landing.jpg" />
+            <ImageCover />
+            <LandingText src="./assets/images/SocialText.svg" />
+            <TextCover />
           </div>
         </div>
       </>

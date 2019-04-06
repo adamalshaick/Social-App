@@ -44,7 +44,6 @@ export class Login extends Component {
                 <h3 className="mb-5">Log in to your account</h3>
                 <form noValidate onSubmit={this.onSubmit}>
                   <InputGroup
-                    id="#email"
                     placeholder="Email Adress"
                     name="email"
                     type="email"
@@ -52,9 +51,9 @@ export class Login extends Component {
                     onChange={this.onChange}
                     error={errors.email}
                     id="email"
+                    icon={"far fa-envelope"}
                   />
                   <InputGroup
-                    id="#password"
                     placeholder="Password"
                     name="password"
                     type="password"
@@ -62,6 +61,7 @@ export class Login extends Component {
                     onChange={this.onChange}
                     error={errors.password}
                     id="password"
+                    icon={"fas fa-unlock"}
                   />
                   <button
                     type="submit"
@@ -84,7 +84,6 @@ export class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 

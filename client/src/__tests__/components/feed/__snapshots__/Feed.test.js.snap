@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="container entry"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6 mt-5"
+      style={
+        Object {
+          "borderLeft": "whitesmoke solid 2px",
+          "borderRight": "whitesmoke solid 2px",
+        }
+      }
+    >
+      <styled.header
+        className="text-center"
+      >
+        Profiles
+      </styled.header>
+      <hr />
+      <Connect(ComposedComponent)
+        currentProfile={Object {}}
+      />
+    </div>
+    <div
+      className="col-md-6 mt-5"
+      style={
+        Object {
+          "borderRight": "whitesmoke solid 2px",
+        }
+      }
+    >
+      <styled.header
+        className="text-center"
+      >
+        Posts
+      </styled.header>
+      <hr />
+      <Connect(ComposedComponent)
+        currentProfile={Object {}}
+      />
+    </div>
+  </div>
+</div>
+`;

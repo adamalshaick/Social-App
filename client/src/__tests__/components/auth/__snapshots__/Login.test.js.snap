@@ -12,13 +12,8 @@ exports[`render component renders component 1`] = `
       <div
         className="col-md-2 col-lg-3"
       />
-      <div
+      <styled.div
         className="col-md-8 col-lg-6 card mt-5 text-center p-0 "
-        style={
-          Object {
-            "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-          }
-        }
       >
         <div
           className="card-body p-5"
@@ -33,6 +28,7 @@ exports[`render component renders component 1`] = `
             onSubmit={[Function]}
           >
             <InputGroup
+              icon="far fa-envelope"
               id="email"
               name="email"
               onChange={[Function]}
@@ -41,6 +37,7 @@ exports[`render component renders component 1`] = `
               value="test@gmail.com"
             />
             <InputGroup
+              icon="fas fa-unlock"
               id="password"
               name="password"
               onChange={[Function]}
@@ -49,7 +46,7 @@ exports[`render component renders component 1`] = `
               value="passwordTest"
             />
             <button
-              className="btn btn-primary btn-block mt-4"
+              className="btn btn-outline-primary btn-block mt-4"
               type="submit"
             >
               Log In
@@ -67,7 +64,7 @@ exports[`render component renders component 1`] = `
             Sign Up
           </Link>
         </div>
-      </div>
+      </styled.div>
     </div>
   </div>
 </Fragment>

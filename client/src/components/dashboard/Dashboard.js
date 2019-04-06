@@ -6,7 +6,7 @@ import FriendRequests from "../friendRequests/FriendRequests";
 import { Header } from "../common/styles/Header";
 import fetchProfile from "../common/hoc/fetchProfile";
 
-const Dashboard = ({ auth, profile }) => {
+export const Dashboard = ({ auth, profile }) => {
   return (
     <article className="container entry">
       {/* return friend requests if there are any */}

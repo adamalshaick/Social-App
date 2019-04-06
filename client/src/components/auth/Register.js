@@ -56,6 +56,7 @@ export class Register extends Component {
                     value={this.state.name}
                     onChange={this.onChange}
                     error={errors.name}
+                    icon={"fas fa-signature"}
                   />
                   <InputGroup
                     id="email"
@@ -65,6 +66,7 @@ export class Register extends Component {
                     value={this.state.email}
                     onChange={this.onChange}
                     error={errors.email}
+                    icon={"far fa-envelope"}
                   />
                   <InputGroup
                     id="password"
@@ -74,6 +76,7 @@ export class Register extends Component {
                     value={this.state.password}
                     onChange={this.onChange}
                     error={errors.password}
+                    icon={"fas fa-unlock"}
                   />
                   <InputGroup
                     id="password2"
@@ -83,6 +86,7 @@ export class Register extends Component {
                     value={this.state.password2}
                     onChange={this.onChange}
                     error={errors.password2}
+                    icon={"fas fa-unlock"}
                   />
                   <button
                     type="submit"
@@ -105,7 +109,6 @@ export class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 

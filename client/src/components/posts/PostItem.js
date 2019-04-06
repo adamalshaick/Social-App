@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
 import CommentForm from "../comments/CommentForm";
 import CommentFeed from "../comments/CommentFeed";
 
-class PostItem extends Component {
+export class PostItem extends Component {
   constructor(props) {
     super(props);
     this.state = { displayCommentForm: false };
@@ -23,35 +22,18 @@ class PostItem extends Component {
     this.props.removeLike(id);
   }
 
-  // findUserLike(likes) {
-  //   // return likes.filter(like => like.user === this.props.currentProfile.user.id)
-  //   //   .length > 0
-  //   //   ? true
-  //   //   : false;
-  //   if (
-  //     likes.filter(like => like.user === this.props.currentProfile.user.id)
-  //       .length > 0
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   render() {
     const { post, currentProfile } = this.props;
 
     return (
       <div className="row">
         <div className="row mt-3">
-          <Link to="">
-            <img
-              style={{ width: "40px" }}
-              className="rounded-circle  ml-4"
-              src="../uploads/post_image/placeholder.png"
-              alt=""
-            />
-          </Link>
+          <img
+            style={{ width: "40px", height: "40px" }}
+            className="rounded-circle  ml-4"
+            src={post.avatar}
+            alt=""
+          />
           <div className="mt-1 ml-2">{post.name}</div>
         </div>
         <div className="col-12">

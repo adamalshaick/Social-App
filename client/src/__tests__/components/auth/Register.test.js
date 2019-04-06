@@ -5,9 +5,6 @@ import toJson from "enzyme-to-json";
 
 const mockRegisterfn = jest.fn();
 const Props = {
-  auth: {
-    isAuthenticated: false
-  },
   errors: {}
 };
 let wrapper;
@@ -17,17 +14,6 @@ wrapper = shallow(<Register {...Props} registerUser={mockRegisterfn} />);
 describe("render component", () => {
   it("renders component", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-});
-
-describe("form tests", () => {
-  it("displays form", () => {
-    expect(wrapper.find("form").length).toEqual(1);
-  });
-
-  it("should call the mock register function", () => {
-    wrapper.find("form").simulate("submit", { preventDefault() {} });
-    expect(mockRegisterfn.mock.calls.length).toBe(1);
   });
 });
 
@@ -46,6 +32,11 @@ describe("register action", () => {
 
   wrapper.find("#password2").simulate("change", {
     target: { name: "password2", value: "password2Test" }
+  });
+
+  it("should call the mock register function", () => {
+    wrapper.find("form").simulate("submit", { preventDefault() {} });
+    expect(mockRegisterfn.mock.calls.length).toBe(1);
   });
 
   it("calls function with correct data", () => {

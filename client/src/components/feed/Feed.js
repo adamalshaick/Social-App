@@ -5,7 +5,7 @@ import Posts from "../posts/Posts";
 import fetchProfile from "../common/hoc/fetchProfile";
 import PropTypes from "prop-types";
 
-const Feed = ({ profile }) => {
+export const Feed = ({ profile }) => {
   return (
     <div className="container entry">
       <div className="row">

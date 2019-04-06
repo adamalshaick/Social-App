@@ -25,6 +25,10 @@ const GroupSchema = new Schema({
         ref: "users"
       }
     }
+  ],
+
+  posts: [
+
   ]
 });
 

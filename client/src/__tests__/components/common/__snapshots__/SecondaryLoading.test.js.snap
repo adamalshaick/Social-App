@@ -5,14 +5,9 @@ exports[`render component renders component 1`] = `
   className="entry"
 >
   <div
-    className="sc-bdVaJa itEkXd"
+    className="sc-htpNat kKAUuf"
   >
-    LOADING
+    ...
   </div>
-  <span
-    className="sc-bwzfXH hvliTh"
-  >
-    .
-  </span>
 </div>
 `;

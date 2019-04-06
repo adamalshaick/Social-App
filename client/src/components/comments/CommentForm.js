@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addComment } from "../../actions/postActions";
 
-class CommentForm extends Component {
+export class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +33,7 @@ class CommentForm extends Component {
       <div className="col-12 entry">
         <form onSubmit={this.onSubmit}>
           <TextAreaFieldGroup
+            id="commentInput"
             className="form-control"
             placeholder="Make a comment..."
             name="text"
@@ -53,7 +54,7 @@ class CommentForm extends Component {
 }
 
 CommentForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
   currentProfile: PropTypes.object.isRequired
 };

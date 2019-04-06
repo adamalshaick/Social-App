@@ -6,7 +6,6 @@ import {
   GET_POSTS,
   GET_POST,
   DELETE_POST,
-  POST_LOADING,
   CLEAR_ERRORS
 } from "./types";
 
@@ -60,7 +59,6 @@ export const deleteComment = (postId, commentId) => dispatch => {
 
 // Get Posts
 export const getPosts = () => dispatch => {
-  dispatch(setPostLoading());
   axios
     .get("/api/posts")
     .then(res =>
@@ -79,7 +77,6 @@ export const getPosts = () => dispatch => {
 
 // Get Post
 export const getPost = id => dispatch => {
-  dispatch(setPostLoading());
   axios
     .get(`/api/posts/${id}`)
     .then(res =>
@@ -138,11 +135,4 @@ export const removeLike = id => dispatch => {
         payload: err.response.data
       })
     );
-};
-
-// Set loading state
-export const setPostLoading = () => {
-  return {
-    type: POST_LOADING
-  };
 };

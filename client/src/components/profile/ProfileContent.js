@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteAccount } from "../../actions/profileActions";
@@ -110,12 +109,6 @@ class ProfileContent extends Component {
             >
               Delete Account
             </button>
-            <Link
-              to="/edit-profile"
-              className="btn btn-outline-dark float-right mt-4 mr-2"
-            >
-              Edit Profile
-            </Link>
           </>
         ) : null}
       </>

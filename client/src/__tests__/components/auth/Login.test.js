@@ -5,9 +5,6 @@ import toJson from "enzyme-to-json";
 
 const mockLoginfn = jest.fn();
 const Props = {
-  auth: {
-    isAuthenticated: false
-  },
   errors: {}
 };
 let wrapper;
@@ -20,17 +17,6 @@ describe("render component", () => {
   });
 });
 
-describe("form test", () => {
-  it("displays form", () => {
-    expect(wrapper.find("form").length).toEqual(1);
-  });
-
-  it("should call the mock login function", () => {
-    wrapper.find("form").simulate("submit", { preventDefault() {} });
-    expect(mockLoginfn.mock.calls.length).toBe(1);
-  });
-});
-
 describe("login action", () => {
   wrapper
     .find("#email")
@@ -38,6 +24,11 @@ describe("login action", () => {
 
   wrapper.find("#password").simulate("change", {
     target: { name: "password", value: "passwordTest" }
+  });
+
+  it("should call the mock login function", () => {
+    wrapper.find("form").simulate("submit", { preventDefault() {} });
+    expect(mockLoginfn.mock.calls.length).toEqual(1);
   });
 
   it("calls function with correct data", () => {

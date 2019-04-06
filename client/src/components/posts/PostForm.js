@@ -5,7 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addPost } from "../../actions/postActions";
 import handleInputErrors from "../common/hoc/handleInputErrors";
 
-class PostForm extends Component {
+export class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = { text: "" };

@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteComment } from "../../actions/postActions";
 
-class CommentItem extends Component {
-  onDeleteClick(postId, commentId) {
+export class CommentItem extends Component {
+  onDeleteClick = (postId, commentId) => e => {
+    e.preventDefault();
     this.props.deleteComment(postId, commentId);
-  }
+  };
 
   render() {
     const { comment, postId, auth } = this.props;
@@ -16,10 +17,9 @@ class CommentItem extends Component {
           <img
             style={{ width: "40px", height: "40px" }}
             className="rounded-circle  ml-4"
-            src="../uploads/post_image/placeholder.png"
+            src={comment.avatar}
             alt=""
           />
-
           <div className="text-center mt-2 ml-2">{comment.name}</div>
 
           <div className="col-12">
@@ -31,8 +31,9 @@ class CommentItem extends Component {
             <div className="mb-4 mt-1" style={{ width: "100%" }}>
               <div style={{ position: "absolute", right: "10px" }}>
                 <button
-                  onClick={this.onDeleteClick.bind(this, postId, comment._id)}
+                  onClick={this.onDeleteClick(postId, comment._id)}
                   type="button"
+                  id="deleteButton"
                   className="btn btn-outline-danger btn-sm mr-1"
                 >
                   Delete Comment

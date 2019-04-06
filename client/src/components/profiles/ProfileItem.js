@@ -30,8 +30,7 @@ class ProfileItem extends Component {
             </div>
             <img
               style={{ height: "200px", width: "200px" }}
-              // src={`../uploads/post_image/${profile.profileImage}`}
-              src="../uploads/post_image/placeholder.png"
+              src={profile.profileImage}
             />
           </Link>
           {profile.friends.find(
