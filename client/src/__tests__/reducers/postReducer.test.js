@@ -4,7 +4,7 @@ import * as types from "../../actions/types";
 describe("INITIAL_STATE", () => {
   it("returns initial state", () => {
     const action = { type: "dummy_action" };
-    const initialState = { posts: [], post: {}, loading: false };
+    const initialState = { posts: [], post: {} };
     expect(postReducer(undefined, action)).toEqual(initialState);
   });
 });
@@ -13,7 +13,7 @@ describe("POST_LOADING", () => {
   it("returns the correct state", () => {
     const initialState = { posts: [] };
     const action = { type: types.POST_LOADING };
-    const expectedState = { posts: [], loading: true };
+    const expectedState = { posts: [] };
 
     expect(postReducer(initialState, action)).toEqual(expectedState);
   });
@@ -23,7 +23,7 @@ describe("GET_POSTS", () => {
   it("returns the correct state", () => {
     const initialState = { posts: [] };
     const action = { type: types.GET_POSTS, payload: "new post" };
-    const expectedState = { posts: "new post", loading: false };
+    const expectedState = { posts: "new post" };
 
     expect(postReducer(initialState, action)).toEqual(expectedState);
   });
