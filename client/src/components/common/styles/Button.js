@@ -1,21 +1,18 @@
 import styled from "styled-components";
 
-export const Button = styled.a`
+export const Button = styled.button`
+  background-color: #2196f3;
   color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  outline: none;
+  float: right;
+  margin-top: 10px;
   &:hover {
-    color: white;
+    cursor: pointer;
+    filter: brightness(90%);
+    transition: all 0.3s;
   }
-  width: 120px;
-  background-color: ${props =>
-    props.fb
-      ? "#3B5998"
-      : props.inst
-      ? "#49769C"
-      : props.yt
-      ? "#FF0000"
-      : props.twit
-      ? "#55ACEE"
-      : props.linkd
-      ? "#1F88BE"
-      : "white"};
 `;

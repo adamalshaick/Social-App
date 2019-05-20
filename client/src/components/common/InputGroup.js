@@ -1,6 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import {
+  TextInput,
+  TextBorder,
+  TextLabel,
+  TextPlaceholder
+} from "./styles/TextInput.js";
 
 const InputGroup = ({
   name,
@@ -18,17 +24,14 @@ const InputGroup = ({
           <i className={icon} />
         </span>
       </div>
-      <input
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
-        })}
-        placeholder={placeholder}
+
+      <TextInput
+        type={type}
         name={name}
         value={value}
         onChange={onChange}
-        type={type}
+        placeholder={placeholder}
       />
-      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };

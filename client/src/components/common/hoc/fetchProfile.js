@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loading from "../Loading";
 import { getCurrentProfile } from "../../../actions/profileActions";
-import Navbar from "../../layout/Navbar";
+import Navbar from "../../navbar/Navbar";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -28,7 +28,6 @@ export default ChildComponent => {
         if (Object.keys(currentProfile).length > 0) {
           return (
             <>
-              <Navbar />
               <ChildComponent {...this.props} />
             </>
           );

@@ -5,10 +5,12 @@ import FriendsFeed from "../friends/FriendsFeed";
 import FriendRequests from "../friendRequests/FriendRequests";
 import { Header } from "../common/styles/Header";
 import fetchProfile from "../common/hoc/fetchProfile";
+import Navbar from "../navbar/Navbar";
 
 export const Dashboard = ({ auth, profile }) => {
   return (
-    <article className="container entry">
+    <article>
+      <Navbar />
       {/* return friend requests if there are any */}
       {profile.currentProfile.friendRequests &&
       profile.currentProfile.friendRequests.length ? (
