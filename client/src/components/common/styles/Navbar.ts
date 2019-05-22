@@ -25,7 +25,8 @@ export const NavigationMarker = styled.div<navProps>`
   background-color: grey;
   color: white;
   border-radius: 3px;
-  transform: translate(50%, 50%);
+  transform: translate(10%, 50%);
+  position: absolute;
   opacity: ${props => (props.hovered ? "1" : "0")};
   transition: all 1s;
 `;

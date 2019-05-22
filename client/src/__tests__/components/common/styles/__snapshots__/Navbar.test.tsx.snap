@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders button 1`] = `
+.c0 {
+  background: none;
+  border: none;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+/>
+`;
+
+exports[`render component renders marker 1`] = `
+.c0 {
+  padding: 0.7rem;
+  font-size: 12px;
+  opacity: 0.9;
+  background-color: grey;
+  color: white;
+  border-radius: 3px;
+  -webkit-transform: translate(10%,50%);
+  -ms-transform: translate(10%,50%);
+  transform: translate(10%,50%);
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`render component renders navbar 1`] = `
+.c0 {
+  height: 60px;
+  width: 100%;
+  border-bottom: whitesmoke solid 5px;
+}
+
+<header
+  className="c0"
+/>
+`;
